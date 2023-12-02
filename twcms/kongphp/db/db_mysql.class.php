@@ -190,7 +190,7 @@ class db_mysql implements db_interface {
 			$sql .= "`name` char(32) NOT NULL default '',";
 			$sql .= "`maxid` int(10) unsigned NOT NULL default '0',";
 			$sql .= "PRIMARY KEY (`name`)";
-			$sql .= ") ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci";
+			$sql .= ") ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci";
 			$this->query($sql, $this->xlink);
 		}else{
 			throw new Exception('framework_maxid error, mysql_error:'.mysql_error());
@@ -240,7 +240,7 @@ class db_mysql implements db_interface {
 			$sql .= "`name` char(32) NOT NULL default '',";
 			$sql .= "`count` int(10) unsigned NOT NULL default '0',";
 			$sql .= "PRIMARY KEY (`name`)";
-			$sql .= ") ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci";
+			$sql .= ") ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci";
 			$this->query($sql, $this->xlink);
 		}else{
 			throw new Exception('framework_cout error, mysql_error:'.mysql_error());
@@ -425,7 +425,7 @@ class db_mysql implements db_interface {
 	 * @param string $engine	数据库引擎
 	 * @return resource
 	 */
-	public function connect($host, $user, $pass, $name, $charset = 'utf8', $engine = '') {
+	public function connect($host, $user, $pass, $name, $charset = 'utf8mb4', $engine = '') {
 		$link = mysql_connect($host, $user, $pass);
 		if(!$link) {
 			throw new Exception(mysql_error());
@@ -440,7 +440,7 @@ class db_mysql implements db_interface {
 
 		// 不考虑 mysql 5.0.1 下以版本
 		$this->query("SET character_set_connection=$charset, character_set_results=$charset, character_set_client=binary, sql_mode=''", $link);
-		//$this->query("SET names utf8, sql_mode=''", $link);
+		//$this->query("SET names utf8mb4, sql_mode=''", $link);
 		return $link;
 	}
 

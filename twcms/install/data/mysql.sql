@@ -21,7 +21,7 @@ CREATE TABLE pre_user (
   PRIMARY KEY (uid),
   UNIQUE KEY username(username),
   KEY email(email)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 # 后台管理用户组表
 DROP TABLE IF EXISTS pre_user_group;
@@ -31,7 +31,7 @@ CREATE TABLE pre_user_group (
   system tinyint(1) unsigned NOT NULL DEFAULT '0',		# 是否由系统定义 (1为系统定义，0为自定义)
   purviews text NOT NULL,					# 后台权限 (为空时不限制)
   PRIMARY KEY (groupid)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 # 分类栏目表
 DROP TABLE IF EXISTS pre_category;
@@ -52,7 +52,7 @@ CREATE TABLE pre_category (
   seo_description char(150) NOT NULL DEFAULT '',	# SEO描述
   PRIMARY KEY (cid),
   UNIQUE KEY alias (alias)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 # 内容模型表
 DROP TABLE IF EXISTS pre_models;
@@ -66,7 +66,7 @@ CREATE TABLE pre_models (
   system tinyint(1) unsigned NOT NULL DEFAULT '0',	# 是否由系统定义 (1为系统定义，0为自定义)
   PRIMARY KEY (mid),
   UNIQUE KEY tablename (tablename)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 # 唯一别名表，用于伪静态 (只储存内容的别名，分类和其他别名放 kv 表)
 DROP TABLE IF EXISTS pre_only_alias;
@@ -77,7 +77,7 @@ CREATE TABLE pre_only_alias (
   id int(10) unsigned NOT NULL DEFAULT '0',		# 内容ID
   PRIMARY KEY (alias),
   KEY mid_id (mid,id)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 # 单页表
 DROP TABLE IF EXISTS pre_cms_page;
@@ -85,7 +85,7 @@ CREATE TABLE pre_cms_page (
   cid smallint(5) unsigned NOT NULL,			# 分类ID
   content mediumtext NOT NULL,				# 单页内容
   PRIMARY KEY (cid)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 # 文章表 (可根据 id 范围分区, 审核/定时发布等考虑单独设计一张表)
 DROP TABLE IF EXISTS pre_cms_article;
@@ -115,7 +115,7 @@ CREATE TABLE pre_cms_article (
   PRIMARY KEY  (id),
   KEY cid_id (cid,id),
   KEY cid_dateline (cid,dateline)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 # 文章数据表 (大内容字段表，可根据 id 范围分区)
 DROP TABLE IF EXISTS pre_cms_article_data;
@@ -123,7 +123,7 @@ CREATE TABLE pre_cms_article_data (
   id int(10) unsigned NOT NULL DEFAULT '0',		# 内容ID
   content mediumtext NOT NULL,				# 内容
   PRIMARY KEY  (id)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 # 文章属性标记表
 DROP TABLE IF EXISTS pre_cms_article_flag;
@@ -134,7 +134,7 @@ CREATE TABLE pre_cms_article_flag (
   PRIMARY KEY  (flag,id),
   KEY flag_cid (flag,cid,id),
   KEY id (id)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 # 文章附件表
 DROP TABLE IF EXISTS pre_cms_article_attach;
@@ -153,7 +153,7 @@ CREATE TABLE pre_cms_article_attach (
   PRIMARY KEY (aid),
   KEY id (id, aid),
   KEY uid (uid, aid)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 # 文章查看数表，用来分离主表的写压力
 DROP TABLE IF EXISTS pre_cms_article_views;
@@ -164,7 +164,7 @@ CREATE TABLE pre_cms_article_views (
   PRIMARY KEY  (id),
   KEY cid (cid,views),
   KEY views (views)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 # 文章评论排序表，用来减小主表索引 (有评论时才写入)
 DROP TABLE IF EXISTS pre_cms_article_comment_sort;
@@ -178,7 +178,7 @@ CREATE TABLE pre_cms_article_comment_sort (
   KEY comments (comments),
   KEY cid_lastdate (cid,lastdate),
   KEY lastdate (lastdate)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 # 文章评论表 (审核机制考虑单独设计一张表)
 DROP TABLE IF EXISTS pre_cms_article_comment;
@@ -193,7 +193,7 @@ CREATE TABLE pre_cms_article_comment (
   PRIMARY KEY  (commentid),
   KEY id (id,commentid),
   KEY ip (ip,commentid)	# 用来做防灌水插件
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 # 文章标签表
 DROP TABLE IF EXISTS pre_cms_article_tag;
@@ -205,7 +205,7 @@ CREATE TABLE pre_cms_article_tag (
   PRIMARY KEY  (tagid),
   UNIQUE KEY name (name),
   KEY count (count)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 # 文章标签数据表
 DROP TABLE IF EXISTS pre_cms_article_tag_data;
@@ -213,7 +213,7 @@ CREATE TABLE pre_cms_article_tag_data (
   tagid int(10) unsigned NOT NULL,			# tagID
   id int(10) unsigned NOT NULL DEFAULT '0',		# 内容ID
   PRIMARY KEY  (tagid,id)				# 排序要用id
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 # 产品表 (可根据 id 范围分区, 审核/定时发布等考虑单独设计一张表)
 DROP TABLE IF EXISTS pre_cms_product;
@@ -243,7 +243,7 @@ CREATE TABLE pre_cms_product (
   PRIMARY KEY  (id),
   KEY cid_id (cid,id),
   KEY cid_dateline (cid,dateline)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 # 产品数据表 (大内容字段表，可根据 id 范围分区)
 DROP TABLE IF EXISTS pre_cms_product_data;
@@ -252,7 +252,7 @@ CREATE TABLE pre_cms_product_data (
   images mediumtext NOT NULL,				# 图集 (json储存)
   content mediumtext NOT NULL,				# 内容
   PRIMARY KEY  (id)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 # 产品属性标记表
 DROP TABLE IF EXISTS pre_cms_product_flag;
@@ -263,7 +263,7 @@ CREATE TABLE pre_cms_product_flag (
   PRIMARY KEY  (flag,id),
   KEY flag_cid (flag,cid,id),
   KEY id (id)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 # 产品附件表
 DROP TABLE IF EXISTS pre_cms_product_attach;
@@ -282,7 +282,7 @@ CREATE TABLE pre_cms_product_attach (
   PRIMARY KEY (aid),
   KEY id (id, aid),
   KEY uid (uid, aid)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 # 产品查看数表，用来分离主表的写压力
 DROP TABLE IF EXISTS pre_cms_product_views;
@@ -293,7 +293,7 @@ CREATE TABLE pre_cms_product_views (
   PRIMARY KEY  (id),
   KEY cid (cid,views),
   KEY views (views)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 # 产品评论排序表，用来减小主表索引 (有评论时才写入)
 DROP TABLE IF EXISTS pre_cms_product_comment_sort;
@@ -307,7 +307,7 @@ CREATE TABLE pre_cms_product_comment_sort (
   KEY comments (comments),
   KEY cid_lastdate (cid,lastdate),
   KEY lastdate (lastdate)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 # 产品评论表 (审核机制考虑单独设计一张表)
 DROP TABLE IF EXISTS pre_cms_product_comment;
@@ -322,7 +322,7 @@ CREATE TABLE pre_cms_product_comment (
   PRIMARY KEY  (commentid),
   KEY id (id,commentid),
   KEY ip (ip,commentid)	# 用来做防灌水插件
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 # 产品标签表
 DROP TABLE IF EXISTS pre_cms_product_tag;
@@ -334,7 +334,7 @@ CREATE TABLE pre_cms_product_tag (
   PRIMARY KEY  (tagid),
   UNIQUE KEY name (name),
   KEY count (count)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 # 产品标签数据表
 DROP TABLE IF EXISTS pre_cms_product_tag_data;
@@ -342,7 +342,7 @@ CREATE TABLE pre_cms_product_tag_data (
   tagid int(10) unsigned NOT NULL,			# tagID
   id int(10) unsigned NOT NULL DEFAULT '0',		# 内容ID
   PRIMARY KEY  (tagid,id)				# 排序要用id
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 # 图集表 (可根据 id 范围分区, 审核/定时发布等考虑单独设计一张表)
 DROP TABLE IF EXISTS pre_cms_photo;
@@ -372,7 +372,7 @@ CREATE TABLE pre_cms_photo (
   PRIMARY KEY  (id),
   KEY cid_id (cid,id),
   KEY cid_dateline (cid,dateline)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 # 图集数据表 (大内容字段表，可根据 id 范围分区)
 DROP TABLE IF EXISTS pre_cms_photo_data;
@@ -381,7 +381,7 @@ CREATE TABLE pre_cms_photo_data (
   images mediumtext NOT NULL,				# 图集 (json储存)
   content mediumtext NOT NULL,				# 内容
   PRIMARY KEY  (id)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 # 图集属性标记表
 DROP TABLE IF EXISTS pre_cms_photo_flag;
@@ -392,7 +392,7 @@ CREATE TABLE pre_cms_photo_flag (
   PRIMARY KEY  (flag,id),
   KEY flag_cid (flag,cid,id),
   KEY id (id)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 # 图集附件表
 DROP TABLE IF EXISTS pre_cms_photo_attach;
@@ -411,7 +411,7 @@ CREATE TABLE pre_cms_photo_attach (
   PRIMARY KEY (aid),
   KEY id (id, aid),
   KEY uid (uid, aid)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 # 图集查看数表，用来分离主表的写压力
 DROP TABLE IF EXISTS pre_cms_photo_views;
@@ -422,7 +422,7 @@ CREATE TABLE pre_cms_photo_views (
   PRIMARY KEY  (id),
   KEY cid (cid,views),
   KEY views (views)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 # 图集评论排序表，用来减小主表索引 (有评论时才写入)
 DROP TABLE IF EXISTS pre_cms_photo_comment_sort;
@@ -436,7 +436,7 @@ CREATE TABLE pre_cms_photo_comment_sort (
   KEY comments (comments),
   KEY cid_lastdate (cid,lastdate),
   KEY lastdate (lastdate)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 # 图集评论表 (审核机制考虑单独设计一张表)
 DROP TABLE IF EXISTS pre_cms_photo_comment;
@@ -451,7 +451,7 @@ CREATE TABLE pre_cms_photo_comment (
   PRIMARY KEY  (commentid),
   KEY id (id,commentid),
   KEY ip (ip,commentid)	# 用来做防灌水插件
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 # 图集标签表
 DROP TABLE IF EXISTS pre_cms_photo_tag;
@@ -463,7 +463,7 @@ CREATE TABLE pre_cms_photo_tag (
   PRIMARY KEY  (tagid),
   UNIQUE KEY name (name),
   KEY count (count)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 # 图集标签数据表
 DROP TABLE IF EXISTS pre_cms_photo_tag_data;
@@ -471,7 +471,7 @@ CREATE TABLE pre_cms_photo_tag_data (
   tagid int(10) unsigned NOT NULL,			# tagID
   id int(10) unsigned NOT NULL DEFAULT '0',		# 内容ID
   PRIMARY KEY  (tagid,id)				# 排序要用id
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 # 持久保存的 key value 数据 (包括设置信息)
 DROP TABLE IF EXISTS pre_kv;
@@ -480,7 +480,7 @@ CREATE TABLE pre_kv (
   v text NOT NULL DEFAULT '',				# 数据
   expiry int(10) unsigned NOT NULL DEFAULT '0',		# 过期时间
   PRIMARY KEY(k)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 # 缓存表
 DROP TABLE IF EXISTS pre_runtime;
@@ -489,7 +489,7 @@ CREATE TABLE pre_runtime (
   v text NOT NULL DEFAULT '',				# 数据
   expiry int(10) unsigned NOT NULL DEFAULT '0',		# 过期时间
   PRIMARY KEY(k)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 # 记录其它表的总行数
 DROP TABLE IF EXISTS pre_framework_count;
@@ -497,7 +497,7 @@ CREATE TABLE pre_framework_count (
   name char(32) NOT NULL DEFAULT '',			# 表名
   count int(10) unsigned NOT NULL DEFAULT '0',		# 总行数
   PRIMARY KEY (name)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 # 记录其它表的最大ID
 DROP TABLE IF EXISTS pre_framework_maxid;
@@ -505,4 +505,4 @@ CREATE TABLE pre_framework_maxid (
   name char(32) NOT NULL DEFAULT '',			# 表名
   maxid int(10) unsigned NOT NULL DEFAULT '0',		# 最大ID
   PRIMARY KEY (name)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;

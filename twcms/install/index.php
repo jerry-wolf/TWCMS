@@ -102,7 +102,7 @@ if($do == 'license') {
 		}
 
 		// 设置编码
-		mysql_query("SET names utf8, sql_mode=''");
+		mysql_query("SET names utf8mb4, sql_mode=''");
 	}catch(Exception $e) {
 		js_back('<u>未知错误！</u><br><u>'.mysql_error().'</u>');
 	}
