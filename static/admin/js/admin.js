@@ -19,7 +19,7 @@ $(function(){
 
 //刷新一个框架
 function ifrRefresh(i) {
-	var newUrl = $("#box_tab ul li").eq(i).attr("url") + getR();
+	var newUrl = $("#box_tab ul li").eq(i).attr("url");
 	$("#box_frame iframe").eq(i).attr("src", newUrl);
 }
 
@@ -67,7 +67,7 @@ function addTab(title, urlKey, url) {
 	$("#box_tab ul li.on").removeClass("on");
 	$("#box_tab ul").append('<li urlKey='+ urlKey +' title="'+ title +'" class="on"><b>'+ title +'</b><i></i></li>');
 	$("#box_frame iframe:visible").hide();
-	$("#box_frame").append('<iframe src="index.php?u='+ url + getR() +'" frameborder="0" scrolling="yes"></iframe>');
+	$("#box_frame").append('<iframe src="index.php?u='+ url +'" frameborder="0" scrolling="yes"></iframe>');
 
 	setUlwidth();
 	if($("#box_tab ul").width() > $("#box_tab").width()) {
@@ -233,9 +233,4 @@ function windowTab() {
 		$("#box_tab ul").css("left", 0);
 	}
 	setAdder();
-}
-
-//解决IE下缓存问题
-function getR() {
-	return "&r="+(new Date).getTime();
 }
