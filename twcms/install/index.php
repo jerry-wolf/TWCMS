@@ -183,9 +183,9 @@ if($do == 'license') {
 		'link_comment_end' => '.html',
 		'link_index_end' => '.html',
 
-		'up_img_ext' => 'jpg,jpeg,gif,png',
+		'up_img_ext' => 'jpg,jpeg,gif,png,webp',
 		'up_img_max_size' => '3074',
-		'up_file_ext' => 'zip,gz,rar,iso,xsl,doc,ppt,wps',
+		'up_file_ext' => 'zip,gz,bzip2,xz,br,zstd,rar,iso,xsl,doc,docx,ppt,pptx,wps',
 		'up_file_max_size' => '10240',
 		'thumb_article_w' => 163,
 		'thumb_article_h' => 124,
