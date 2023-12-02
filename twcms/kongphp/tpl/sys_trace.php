@@ -50,9 +50,8 @@
 <script>
 (function(){
 var isIE = !!window.ActiveXObject;
-var isIE6 = window.VBArray && !window.XMLHttpRequest;
 var isQuirks = document.compatMode == 'BackCompat';
-var isDisable = (isIE && isQuirks) || isIE6;
+var isDisable = (isIE && isQuirks);
 var win = document.getElementById('kong_trace_win');
 var size = document.getElementById('kong_trace_size');
 var open = document.getElementById('kong_trace_open');
