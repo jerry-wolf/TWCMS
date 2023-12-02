@@ -134,6 +134,12 @@ function setAdder(){
 
 //加载事件
 function loadEvent() {
+	$("#box_tab ul li:last").on("auxclick", function(event){
+		if (event.button === 1) {
+			var obj = $(this);
+			rmTab($("#box_tab ul li").index(obj));
+		}
+	});
 	$("#box_tab ul li:last").click(function(){onTab($(this))});
 	$("#box_tab ul li i:last,#box_tab ul li b:last").hover(function(){$(this).addClass("on")},function(){$(this).removeAttr("class")});
 	$("#box_tab ul li i:last").click(function(){
