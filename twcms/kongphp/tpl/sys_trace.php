@@ -47,7 +47,7 @@
 		<ol class="ktun"><?php echo self::arr2str($_ENV['_include'], 1);?></ol>
 	</div>
 </div>
-<script type="text/javascript">
+<script>
 (function(){
 var isIE = !!window.ActiveXObject;
 var isIE6 = window.VBArray && !window.XMLHttpRequest;

@@ -25,7 +25,7 @@ body,div,ul,li,h1{margin:0;padding:0}
 	<ul class="fo">&lt;?php echo 'KongPHP, Road to Jane.'; ?&gt;</ul>
 </div>
 <?php if($jumpurl != -1) { ?>
-<script type="text/javascript">
+<script>
 var dot = '', t;
 var jump = document.getElementById("jump");
 var time = <?php echo $delay;?>;

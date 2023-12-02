@@ -165,7 +165,7 @@ if($do == 'license') {
 		'webdomain' => $webdomain,
 		'webdir' => $webdir,
 		'webmail' => 'admin@qq.com',
-		'tongji' => '<script type="text/javascript">var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cscript src=\'" + _bdhmProtocol + "hm.baidu.com/h.js%3F948dba1e5d873b9c1f1c77078c521c89\' type=\'text/javascript\'%3E%3C/script%3E"));</script>',
+		'tongji' => '<script>var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cscript src=\'" + _bdhmProtocol + "hm.baidu.com/h.js%3F948dba1e5d873b9c1f1c77078c521c89\' type=\'text/javascript\'%3E%3C/script%3E"));</script>',
 		'beian' => '京ICP备20121225号',
 		'seo_title' => '让建站变的更简单！',
 		'seo_keywords' => '通王CMS,TWCMS',
@@ -261,5 +261,5 @@ if($do == 'license') {
 	js_show($s);
 
 	// 统计一下安装数
-	echo '<script type="text/javascript" src="http://www.twcms.com/app/?install='.$webdomain.'"></script>';
+	echo '<script src="http://www.twcms.com/app/?install='.$webdomain.'"></script>';
 }

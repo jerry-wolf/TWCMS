@@ -1,12 +1,12 @@
 <!doctype html>
 <html>
 <head>
-	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<meta charset="utf-8" />
 	<title>{$tw[titles]}</title>
 	<meta name="keywords" content="{$tw[seo_keywords]}" />
 	<meta name="description" content="{$tw[seo_description]}" />
 	<link rel="shortcut icon" type="image/x-icon" href= "{$tw[webdir]}favicon.ico" />
-	<link rel="stylesheet" type="text/css" href="{$tw[tpl]}css/global.css" />
+	<link rel="stylesheet" href="{$tw[tpl]}css/global.css" />
 </head>
 
 {inc:header.htm}
@@ -89,9 +89,9 @@
 						<a class="bds_t163"></a>
 						<a class="shareCount"></a>
 						</div>
-						<script type="text/javascript" id="bdshare_js" data="type=tools&amp;uid=696260" ></script>
-						<script type="text/javascript" id="bdshell_js"></script>
-						<script type="text/javascript">
+						<script id="bdshare_js" data="type=tools&amp;uid=696260" ></script>
+						<script id="bdshell_js"></script>
+						<script>
 						document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000)
 						</script>
 						<!-- Baidu Button END -->
@@ -165,12 +165,12 @@
 
 {inc:footer.htm}
 
-<script type="text/javascript" src="{$tw[webdir]}static/js/jquery.js"></script>
-<script type="text/javascript" src="{$tw[tpl]}js/main.js"></script>
-<script type="text/javascript">
+<script src="{$tw[webdir]}static/js/jquery.js"></script>
+<script src="{$tw[tpl]}js/main.js"></script>
+<script>
 $.getScript("{$gdata[views_url]}", function(){ $("#views").html(views); });
 </script>
-<script type="text/javascript">
+<script>
 //加载更多评论
 (function(){
 	var obj = $("#load_more");

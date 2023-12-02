@@ -74,7 +74,7 @@ function split_sql($sql, $tablepre) {
 
 // JS输出
 function js_show($s) {
-	echo '<script type="text/javascript">jsShow(\''.addslashes($s).'\');</script>'."\r\n";
+	echo '<script>jsShow(\''.addslashes($s).'\');</script>'."\r\n";
 	flush();
 	ob_flush();
 }
