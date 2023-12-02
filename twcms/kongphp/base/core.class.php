@@ -73,13 +73,6 @@ class core{
 
 		spl_autoload_register(array('core', 'autoload_handler'));	// 设置自动包含类文件方法
 
-		// GPC 安全过滤
-		if(get_magic_quotes_gpc()) {
-			_stripslashes($_GET);
-			_stripslashes($_POST);
-			_stripslashes($_COOKIE);
-		}
-
 		// 初始化全局变量
 		$_ENV['_sqls'] = array();	// debug 时使用
 		$_ENV['_include'] = array();	// autoload 时使用
