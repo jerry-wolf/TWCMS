@@ -80,20 +80,20 @@ if($do == 'license') {
 	}
 	$link = mysqli_connect($dbhost, $dbuser, $dbpw);
 	if(!$link) {
-		js_back('MySQL 主机、账号或密码不正确！<br><u>'.mysqli_error().'</u>');
+		js_back('MySQL 主机、账号或密码不正确！<br><u>'.mysqli_connect_error().'</u>');
 	}
 
 	try{
-		mysqli_select_db($dbname, $link);
-		if(mysqli_errno() == 1049) {
-			mysqli_query("CREATE DATABASE $dbname DEFAULT CHARACTER SET UTF8MB4");
-			if(!mysqli_select_db($dbname, $link)) {
-				js_back('自动创建数据库失败鸟！您的MySQL账号是否有权限创建数据库？<br><u>'.mysqli_error().'</u>');
+		mysqli_select_db($link, $dbname);
+		if(mysqli_errno($link) == 1049) {
+			mysqli_query($link, "CREATE DATABASE $dbname DEFAULT CHARACTER SET UTF8MB4");
+			if(!mysqli_select_db($link, $dbname)) {
+				js_back('自动创建数据库失败鸟！您的MySQL账号是否有权限创建数据库？<br><u>'.mysqli_error($link).'</u>');
 			}
 		}
 		// 为防止意外，让用户自己做选择
 		if(empty($_POST['cover'])) {
-			$query = mysqli_query("SHOW TABLES FROM $dbname");
+			$query = mysqli_query($link, "SHOW TABLES FROM $dbname");
 			while($row = mysqli_fetch_row($query)) {
 				if(preg_match("#^{$tablepre}#", $row[0])) {
 					js_back('<u>发现有相同表前缀，请返回选择“覆盖安装”或“修改表前缀”。</u>');
@@ -102,9 +102,9 @@ if($do == 'license') {
 		}
 
 		// 设置编码
-		mysqli_query("SET names utf8mb4, sql_mode=''");
+		mysqli_query($link, "SET names utf8mb4, sql_mode=''");
 	}catch(Exception $e) {
-		js_back('<u>未知错误！</u><br><u>'.mysqli_error().'</u>');
+		js_back('<u>未知错误！</u><br><u>'.mysqli_error($link).'</u>');
 	}
 
 	// 创建数据表
@@ -116,24 +116,24 @@ if($do == 'license') {
 	$sqls = split_sql($s, $tablepre);
 	foreach($sqls as $sql) {
 		$sql = str_replace("\n", '', trim($sql));
-		$ret = mysqli_query($sql);
+		$ret = mysqli_query($link, $sql);
 		if(substr($sql, 0, 6) == 'CREATE') {
 			$name = preg_replace("/CREATE TABLE ([`a-z0-9_]+) .*/is", "\\1", $sql);
 
 			if($ret) {
 				js_show('创建数据表 '.$name.' ... <i>成功</i>');
 			}else{
-				js_back('创建数据表 '.$name.' ... <u>失败</u> (您的数据库没有写权限？)<br><u>'.mysqli_error().'</u>');
+				js_back('创建数据表 '.$name.' ... <u>失败</u> (您的数据库没有写权限？)<br><u>'.mysqli_error($link).'</u>');
 			}
 		}
 
 		if(!$ret) {
-			js_back('创建数据表失败</u> (您的数据库没有权限？)<br><u>'.mysqli_error().'</u>');
+			js_back('创建数据表失败</u> (您的数据库没有权限？)<br><u>'.mysqli_error($link).'</u>');
 		}
 	}
 
 	// 创建基本数据
-	$file = TWCMS_INST.'/data/mysqli_data.sql';
+	$file = TWCMS_INST.'/data/mysql_data.sql';
 	if(!is_file($file)) {
 		js_back('mysqli_data.sql 文件 <u>丢失</u>');
 	}
@@ -142,7 +142,7 @@ if($do == 'license') {
 	$ret = true;
 	foreach($sqls as $sql) {
 		$sql = str_replace("\n", '', trim($sql));
-		mysqli_query($sql) || $ret = false;
+		mysqli_query($link, $sql) || $ret = false;
 	}
 	js_show('创建基本数据 ... '.($ret ? '<i>成功</i>' : '<u>失败</u>'));
 	if(!$ret) exit;
@@ -152,7 +152,7 @@ if($do == 'license') {
 	$password = md5(md5($adm_pass).$salt);
 	$ip = ip2long(ip());
 	$time = time();
-	$ret = mysqli_query("INSERT INTO `{$tablepre}user` (`uid`, `username`, `password`, `salt`, `groupid`, `email`, `homepage`, `intro`, `regip`, `regdate`, `loginip`, `logindate`, `lastip`, `lastdate`, `contents`, `comments`, `logins`) VALUES (1, '{$adm_user}', '{$password}', '{$salt}', 1, '', '', '', {$ip}, {$time}, 0, 0, 0, 0, 0, 0, 0);");
+	$ret = mysqli_query($link, "INSERT INTO `{$tablepre}user` (`uid`, `username`, `password`, `salt`, `groupid`, `email`, `homepage`, `intro`, `regip`, `regdate`, `loginip`, `logindate`, `lastip`, `lastdate`, `contents`, `comments`, `logins`) VALUES (1, '{$adm_user}', '{$password}', '{$salt}', 1, '', '', '', {$ip}, {$time}, 0, 0, 0, 0, 0, 0, 0);");
 	js_show('创建创始人 ... '.($ret ? '<i>成功</i>' : '<u>失败</u>'));
 	if(!$ret) exit;
 
@@ -199,7 +199,7 @@ if($do == 'license') {
 		'watermark_pct' => 90,
 	);
 	$settings = addslashes(json_encode($cfg));
-	$ret = mysqli_query("INSERT INTO {$tablepre}kv SET k='cfg',v='{$settings}',expiry='0'");
+	$ret = mysqli_query($link, "INSERT INTO {$tablepre}kv SET k='cfg',v='{$settings}',expiry='0'");
 	js_show('初始网站设置 ... '.($ret ? '<i>成功</i>' : '<u>失败</u>'));
 	if(!$ret) exit;
 

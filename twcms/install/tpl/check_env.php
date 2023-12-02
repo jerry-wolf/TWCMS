@@ -28,10 +28,10 @@
 			<td><?php echo function_exists('disk_free_space') ? get_byte(disk_free_space(TWCMS_ROOT)) : 'unknow'; ?></td>
 		</tr>
 		<tr>
-			<td>mysql扩展</td>
+			<td>mysqli扩展</td>
 			<td>必须开启</td>
 			<td><?php
-				if(extension_loaded('mysql')) {
+				if(extension_loaded('mysqli')) {
 					echo '<i>开启[√]</i>';
 				}else{
 					$err = 1;

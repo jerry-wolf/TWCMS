@@ -67,7 +67,7 @@ class db_mysql implements db_interface {
 	public function get($key) {
 		list($table, $keyarr, $keystr) = $this->key2arr($key);
 		$query = $this->query("SELECT * FROM {$this->tablepre}$table WHERE $keystr LIMIT 1", $this->rlink);
-		$data = mysql_fetch_assoc($query);
+		$data = mysqli_fetch_assoc($query);
 		return $data ? $data : array();
 	}
 
@@ -97,7 +97,7 @@ class db_mysql implements db_interface {
 		$sql = substr($sql, 0, -4);
 		if($sql) {
 			$query = $this->query("SELECT * FROM {$this->tablepre}$table WHERE $sql", $this->rlink);
-			while($row = mysql_fetch_assoc($query)) {
+			while($row = mysqli_fetch_assoc($query)) {
 				$keyname = $table;
 				foreach($keyarr as $k=>$v) {
 					$keyname .= "-$k-".$row[$k];
@@ -185,7 +185,7 @@ class db_mysql implements db_interface {
 
 		if($query) {
 			$maxid = $this->result($query, 0);
-		}elseif(mysql_errno($this->xlink) == 1146) {
+		}elseif(mysqli_errno($this->xlink) == 1146) {
 			$sql = "CREATE TABLE `{$this->tablepre}framework_maxid` (";
 			$sql .= "`name` char(32) NOT NULL default '',";
 			$sql .= "`maxid` int(10) unsigned NOT NULL default '0',";
@@ -193,7 +193,7 @@ class db_mysql implements db_interface {
 			$sql .= ") ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci";
 			$this->query($sql, $this->xlink);
 		}else{
-			throw new Exception('framework_maxid error, mysql_error:'.mysql_error());
+			throw new Exception('framework_maxid error, mysqli_error:'.mysqli_error($this->xlink));
 		}
 		if($maxid === FALSE) {
 			$query = $this->query("SELECT MAX($col) FROM {$this->tablepre}$table", $this->wlink);
@@ -235,7 +235,7 @@ class db_mysql implements db_interface {
 
 		if($query) {
 			$count = $this->result($query, 0);
-		}elseif(mysql_errno($this->xlink) == 1146) {
+		}elseif(mysqli_errno($this->xlink) == 1146) {
 			$sql = "CREATE TABLE {$this->tablepre}framework_count (";
 			$sql .= "`name` char(32) NOT NULL default '',";
 			$sql .= "`count` int(10) unsigned NOT NULL default '0',";
@@ -243,7 +243,7 @@ class db_mysql implements db_interface {
 			$sql .= ") ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci";
 			$this->query($sql, $this->xlink);
 		}else{
-			throw new Exception('framework_cout error, mysql_error:'.mysql_error());
+			throw new Exception('framework_cout error, mysqli_error:'.mysqli_error($this->xlink));
 		}
 		if($count === FALSE) {
 			$query = $this->query("SELECT COUNT(*) FROM {$this->tablepre}$table", $this->wlink);
@@ -326,7 +326,7 @@ class db_mysql implements db_interface {
 
 		$ret = array();
 		$query = $this->query($s, $this->rlink);
-		while($row = mysql_fetch_assoc($query)) {
+		while($row = mysqli_fetch_assoc($query)) {
 			$keystr = '';
 			foreach($pri as $k) {
 				$keystr .= "-$k-".$row[$k];
@@ -348,7 +348,7 @@ class db_mysql implements db_interface {
 		$data = $this->arr2sql($data);
 		$lpy = $lowprority ? 'LOW_PRIORITY' : '';
 		$this->query("UPDATE $lpy {$this->tablepre}$table SET $data $where", $this->wlink);
-		return mysql_affected_rows($this->wlink);
+		return mysqli_affected_rows($this->wlink);
 	}
 
 	/**
@@ -362,7 +362,7 @@ class db_mysql implements db_interface {
 		$where = $this->arr2where($where);
 		$lpy = $lowprority ? 'LOW_PRIORITY' : '';
 		$this->query("DELETE $lpy FROM {$this->tablepre}$table $where", $this->wlink);
-		return mysql_affected_rows($this->wlink);
+		return mysqli_affected_rows($this->wlink);
 	}
 
 	/**
@@ -426,13 +426,13 @@ class db_mysql implements db_interface {
 	 * @return resource
 	 */
 	public function connect($host, $user, $pass, $name, $charset = 'utf8mb4', $engine = '') {
-		$link = mysql_connect($host, $user, $pass);
+		$link = mysqli_connect($host, $user, $pass);
 		if(!$link) {
-			throw new Exception(mysql_error());
+			throw new Exception(mysqli_connect_error());
 		}
-		$result = mysql_select_db($name, $link);
+		$result = mysqli_select_db($link, $name);
 		if(!$result) {
-			throw new Exception(mysql_error());
+			throw new Exception(mysqli_connect_error());
 		}
 		if(!empty($engine) && $engine == 'InnoDB') {
 			$this->query("SET innodb_flush_log_at_trx_commit=no", $link);
@@ -449,33 +449,33 @@ class db_mysql implements db_interface {
 	 * @param string $sql		SQL 语句
 	 * @param string $link		打开的连接
 	 * @param boot $isthrow		错误时是否抛
-	 * @return resource
+	 * @return mysqli_result
 	 */
 	public function query($sql, $link = NULL, $isthrow = TRUE) {
 		empty($link) && $link = $this->wlink;
 
 		if(defined('DEBUG') && DEBUG && isset($_ENV['_sqls']) && count($_ENV['_sqls']) < 1000) {
 			$start = microtime(1);
-			$result = mysql_query($sql, $link);
+			$result = mysqli_query($link, $sql);
 			$runtime = number_format(microtime(1) - $start, 4);
 
 			// explain 分析 select 语句
 			$explain_str = '';
 			if(substr($sql, 0, 6) == 'SELECT') {
-				$query = mysql_query("explain $sql", $link);
+				$query = mysqli_query($link, "explain $sql");
 				if($query !== FALSE) {
-					$explain_arr = mysql_fetch_assoc($query);
+					$explain_arr = mysqli_fetch_assoc($query);
 					//print_r($explain_arr);
 					$explain_str = ' <font color="blue">[explain type: '.$explain_arr['type'].' | rows: '.$explain_arr['rows'].']</font>';
 				}
 			}
 			$_ENV['_sqls'][] = ' <font color="red">[time:'.$runtime.'s]</font> '.htmlspecialchars(stripslashes($sql)).$explain_str;
 		}else{
-			$result = mysql_query($sql, $link);
+			$result = mysqli_query($link, $sql);
 		}
 
 		if(!$result && $isthrow) {
-			$s = 'MySQL Query Error: <b>'.$sql.'</b>. '.mysql_error();
+			$s = 'MySQL Query Error: <b>'.$sql.'</b>. '.mysqli_error($link);
 
 			if(defined('DEBUG') && !DEBUG) $s = str_replace($this->tablepre, '***', $s); // 防止泄露敏感信息
 
@@ -494,7 +494,7 @@ class db_mysql implements db_interface {
 	public function fetch_first($sql, $link = NULL) {
 		empty($link) && $link = $this->rlink;
 		$query = $this->query($sql, $link);
-		return mysql_fetch_assoc($query);
+		return mysqli_fetch_assoc($query);
 	}
 
 	/**
@@ -507,7 +507,7 @@ class db_mysql implements db_interface {
 		empty($link) && $link = $this->rlink;
 		$query = $this->query($sql, $link);
 		$ret = array();
-		while($row = mysql_fetch_assoc($query)) {
+		while($row = mysqli_fetch_assoc($query)) {
 			$ret[] = $row;
 		}
 		return $ret;
@@ -515,12 +515,13 @@ class db_mysql implements db_interface {
 
 	/**
 	 * 获取结果数据
-	 * @param resource $query	查询结果集
+	 * @param mysqli_result $result	查询结果集
 	 * @param int $row			第几列
 	 * @return int
 	 */
-	public function result($query, $row) {
-		return mysql_num_rows($query) ? intval(mysql_result($query, $row)) : FALSE;
+	public function result($result, $row) {
+		$row && mysqli_data_seek($result, $row);
+		return mysqli_num_rows($result) ? intval(mysqli_fetch_row($result)[0]) : FALSE;
 	}
 
 	/**
@@ -528,7 +529,7 @@ class db_mysql implements db_interface {
 	 * @return string
 	 */
 	public function version() {
-		return mysql_get_server_info($this->rlink);
+		return mysqli_get_server_info($this->rlink);
 	}
 
 	/**
@@ -536,10 +537,10 @@ class db_mysql implements db_interface {
 	 */
 	public function __destruct() {
 		if(!empty($this->wlink)) {
-			mysql_close($this->wlink);
+			mysqli_close($this->wlink);
 		}
 		if(!empty($this->rlink) && !empty($this->wlink) && $this->rlink != $this->wlink) {
-			mysql_close($this->rlink);
+			mysqli_close($this->rlink);
 		}
 	}
 

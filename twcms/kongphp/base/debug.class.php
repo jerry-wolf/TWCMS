@@ -221,7 +221,7 @@ class debug{
 	 */
 	public static function to_message($s) {
 		$s = strip_tags($s);
-		if(strpos($s, 'mysql_connect') !== false) {
+		if(strpos($s, 'mysqli_connect') !== false) {
 			$s .= ' [连接数据库出错！配置信息见 config.inc.php]';
 		}
 		return $s;
