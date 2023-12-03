@@ -253,7 +253,7 @@ $(function() {
 			var _this = $(this);
 			$.post(_this.attr("action"), _this.serialize(), function(data){
 				try{
-					var json = eval("("+data+")");
+					var json = JSON.parse(data);
 					if(json.kong_status) {
 						$("#ctf_tips").html('<font color="green">'+json.message+'</font>');
 						setTimeout(function(){

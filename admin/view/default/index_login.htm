@@ -54,7 +54,7 @@ $("form:first").submit(function(){
 function toJson(data) {
 	var json = {};
 	try{
-		json = eval("("+data+")");
+		json = JSON.parse(data);
 	}catch(e){
 		//alert(data);
 		$("body").replaceWith(data);

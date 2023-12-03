@@ -193,7 +193,7 @@ $.getScript("{$gdata[views_url]}", function(){ $("#views").html(views); });
 
 		$.get(next_url, function(data) {
 			try{
-				var json = eval("("+data+")");
+				var json = JSON.parse(data);
 				next_url = json.next_url;
 				$.each(json.list_arr, function(i,item) {
 					var s = '<div class="li">';

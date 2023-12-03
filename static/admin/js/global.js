@@ -338,7 +338,7 @@ function twLoadCss(file) {
 function toJson(data) {
 	var json = {};
 	try{
-		json = eval("("+data+")");
+		json = JSON.parse(data);
 
 		if(json.kp_error) {
 			twAjax.debug(json);
