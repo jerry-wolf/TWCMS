@@ -78,8 +78,8 @@ class debug{
 		$trace = $e->getTrace();
 		if(!empty($trace) && $trace[0]['function'] == 'error_handler' && $trace[0]['class'] == 'debug') {
 			$message = $e->getMessage();
-			$file = $trace[0]['args'][2];
-			$line = $trace[0]['args'][3];
+			$file = $trace[0]['file'];
+			$line = $trace[0]['line'];
 		}else{
 			$message = '[程序异常] : '.$e->getMessage();
 			$file = $e->getFile();
