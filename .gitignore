@@ -2,3 +2,5 @@
 !/twcms/config/index.htm
 /twcms/log
 /twcms/runtime
+/upload
+!/upload/index.htm
