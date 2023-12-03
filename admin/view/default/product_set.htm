@@ -461,10 +461,9 @@ function setPicBut() {
 // 定位图集上传按钮
 function setImgBut() {
 	if(!$("#tw_img_but").length) return;
-	var isIE = !!window.ActiveXObject;
 	var obj = $("#tw_img_but");
 	var p = obj.position();
-	var top = isIE  ? p.top-10 : p.top;
+	var top = p.top;
 	$("#tw_img_upfile").hover(function(){
 		obj.addClass("but_on");
 	}, function(){

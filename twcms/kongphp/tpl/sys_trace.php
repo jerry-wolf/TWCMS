@@ -49,9 +49,6 @@
 </div>
 <script>
 (function(){
-var isIE = !!window.ActiveXObject;
-var isQuirks = document.compatMode == 'BackCompat';
-var isDisable = (isIE && isQuirks);
 var win = document.getElementById('kong_trace_win');
 var size = document.getElementById('kong_trace_size');
 var open = document.getElementById('kong_trace_open');
@@ -110,18 +107,16 @@ for(var i = 0; i < tab_tit.length; i++) {
 		};
 	})(i);
 }
-if(!isDisable) {
-	open.style.display = 'block';
+open.style.display = 'block';
 
-	if(typeof open.click == 'function') {
-		parseInt(history[0]) && open.click();
-		parseInt(history[1]) && size.click();
-		tab_tit[history[2]].click();
-	}else{
-		parseInt(history[0]) && open.onclick();
-		parseInt(history[1]) && size.onclick();
-		tab_tit[history[2]].onclick();
-	}
+if(typeof open.click == 'function') {
+	parseInt(history[0]) && open.click();
+	parseInt(history[1]) && size.click();
+	tab_tit[history[2]].click();
+}else{
+	parseInt(history[0]) && open.onclick();
+	parseInt(history[1]) && size.onclick();
+	tab_tit[history[2]].onclick();
 }
 })();
 </script>
