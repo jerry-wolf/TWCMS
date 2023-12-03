@@ -11,13 +11,13 @@ CREATE TABLE pre_user (
   intro text NOT NULL,					# 个人介绍
   regip int(10) NOT NULL DEFAULT '0',			# 注册IP
   regdate int(10) unsigned NOT NULL DEFAULT '0',	# 注册日期
-  loginip int(10) NOT NULL DEFAULT '0',			# 登陆IP
-  logindate int(10) unsigned NOT NULL DEFAULT '0',	# 登陆日期
-  lastip int(10) NOT NULL DEFAULT '0',			# 上次登陆IP
-  lastdate int(10) unsigned NOT NULL DEFAULT '0',	# 上次登陆日期
+  loginip int(10) NOT NULL DEFAULT '0',			# 登录IP
+  logindate int(10) unsigned NOT NULL DEFAULT '0',	# 登录日期
+  lastip int(10) NOT NULL DEFAULT '0',			# 上次登录IP
+  lastdate int(10) unsigned NOT NULL DEFAULT '0',	# 上次登录日期
   contents int(10) unsigned NOT NULL DEFAULT '0',	# 内容数
   comments int(10) unsigned NOT NULL DEFAULT '0',	# 评论数
-  logins int(10) unsigned NOT NULL DEFAULT '0',		# 登陆数
+  logins int(10) unsigned NOT NULL DEFAULT '0',		# 登录数
   PRIMARY KEY (uid),
   UNIQUE KEY username(username),
   KEY email(email)

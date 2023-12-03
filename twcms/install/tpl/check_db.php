@@ -36,7 +36,7 @@
 		</tr>
 		<tr>
 			<td width="80">用户名</strong></td>
-			<td><input class="inp" id="adm_user" name="adm_user" type="text" value="admin" tips="请填写用户名，后台登陆时使用"></td>
+			<td><input class="inp" id="adm_user" name="adm_user" type="text" value="admin" tips="请填写用户名，后台登录时使用"></td>
 		</tr>
 		<tr>
 			<td>密码</strong></td>

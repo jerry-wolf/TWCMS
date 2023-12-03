@@ -19,7 +19,7 @@ class index_control extends admin_control{
 		exit;
 	}
 
-	// 后台登陆
+	// 后台登录
 	public function login() {
 		if(empty($_POST)) {
 			$this->display();
@@ -46,7 +46,7 @@ class index_control extends admin_control{
 				$admauth = str_auth("$data[uid]\t$data[username]\t$data[password]\t$data[groupid]\t$ip", 'ENCODE');
 				_setcookie('admauth', $admauth, 0, '', '', false, true);
 
-				// 更新登陆信息
+				// 更新登录信息
 				$data['lastip'] = $data['loginip'];
 				$data['lastdate'] = $data['logindate'];
 				$data['loginip'] = ip2long($ip);

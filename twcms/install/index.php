@@ -257,7 +257,7 @@ if($do == 'license') {
 	$s .= '首页地址：<a href="'.$weburl.'" target="_blank">'.$weburl.'</a><br>';
 	$s .= '后台地址：<a href="'.$weburl.'admin/" target="_blank">'.$weburl.'admin/</a><br>';
 	$s .= '用户名：'.$adm_user.'　<br>密　码：'.$adm_pass.'<br>';
-	$s .= '亲，请牢记以上信息，您可以登陆后台修改密码及网站设置。^_^</p></div>';
+	$s .= '亲，请牢记以上信息，您可以登录后台修改密码及网站设置。^_^</p></div>';
 	js_show($s);
 
 	// 统计一下安装数
