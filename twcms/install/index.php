@@ -4,7 +4,7 @@
  * Author: wuzhaohuan <kongphp@gmail.com>
  */
 
-version_compare(PHP_VERSION, '5.2.0', '>') || die('require PHP > 5.2.0 !');
+version_compare(PHP_VERSION, '7.4.0', '>') || die('require PHP > 7.4.0 !');
 
 define('TWCMS_INST', dirname(__FILE__));
 define('TWCMS_CORE', dirname(TWCMS_INST));

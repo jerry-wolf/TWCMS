@@ -109,6 +109,10 @@ class article_control extends admin_control {
 			$edit_cid_id = '&mid=2';
 			$this->assign('edit_cid_id', $edit_cid_id);
 
+			$cfg = $this->runtime->xget();
+			$allowExt = implode(',', array_map(function ($ext) { return '.' . $ext; }, explode(',', $cfg['up_img_ext'])));
+			$this->assign('allowExt', $allowExt);
+
 			$this->display('article_set.htm');
 		}else{
 			$cid = intval(R('cid', 'P'));
@@ -314,6 +318,10 @@ class article_control extends admin_control {
 
 			$edit_cid_id = '&mid=2&cid='.$data['cid'].'&id='.$data['id'];
 			$this->assign('edit_cid_id', $edit_cid_id);
+
+			$cfg = $this->runtime->xget();
+			$allowExt = implode(',', array_map(function ($ext) { return '.' . $ext; }, explode(',', $cfg['up_img_ext'])));
+			$this->assign('allowExt', $allowExt);
 
 			$this->display('article_set.htm');
 		}else{

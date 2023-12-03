@@ -111,6 +111,10 @@ class photo_control extends admin_control {
 			$edit_cid_id = '&mid=4';
 			$this->assign('edit_cid_id', $edit_cid_id);
 
+			$cfg = $this->runtime->xget();
+			$allowExt = implode(',', array_map(function ($ext) { return '.' . $ext; }, explode(',', $cfg['up_img_ext'])));
+			$this->assign('allowExt', $allowExt);
+
 			$this->display('photo_set.htm');
 		}else{
 			$cid = intval(R('cid', 'P'));
@@ -318,6 +322,10 @@ class photo_control extends admin_control {
 
 			$edit_cid_id = '&mid=4&cid='.$data['cid'].'&id='.$data['id'];
 			$this->assign('edit_cid_id', $edit_cid_id);
+
+			$cfg = $this->runtime->xget();
+			$allowExt = implode(',', array_map(function ($ext) { return '.' . $ext; }, explode(',', $cfg['up_img_ext'])));
+			$this->assign('allowExt', $allowExt);
 
 			$this->display('photo_set.htm');
 		}else{
