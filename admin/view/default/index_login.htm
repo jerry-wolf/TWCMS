@@ -2,9 +2,9 @@
 <html>
 <head>
 <title>通王CMS 后台登录</title>
-<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+<meta charset="utf-8" />
 <script>if(self.parent.frames.length != 0) self.parent.location=document.location;</script>
-<link href="{$C[admin_static]}admin/css/login.css" type="text/css" rel="stylesheet" />
+<link href="{$C[admin_static]}admin/css/login.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -17,7 +17,7 @@
 	<dt><input type="submit" value="登录" id="btn" /></dt>
 </dl>
 </form>
-<script src="{$C[admin_static]}js/jquery.js" type="text/javascript"></script>
+<script src="{$C[admin_static]}js/jquery.js"></script>
 <script>
 var t = ($(document).height()-$("#lgn").height())/2;
 $("#lgn").animate({top: t+10}, 'slow').animate({top: t-10}, 'fast').animate({top: t}, 'fast');

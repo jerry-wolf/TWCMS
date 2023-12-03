@@ -1,8 +1,8 @@
 <!doctype html>
 <head>
 <title>通王CMS 安装向导</title>
-<meta http-equiv="content-type" content="text/html;charset=utf-8" />
-<link href="img/style.css"rel="stylesheet" type="text/css"  />
+<meta charset="utf-8" />
+<link href="img/style.css"rel="stylesheet"  />
 </head>
 
 <body scroll="no">

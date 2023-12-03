@@ -94,7 +94,7 @@ function setStyle(name, val, func, a, b, c, d, e) {
 		s += "}";
 		s2 += "-"+arr[v]+"-animation:"+func+" "+val+";"
 	}
-	$("head").append('<style type="text/css">'+s+name+'{'+s2+'}</style>');
+	$("head").append('<style>'+s+name+'{'+s2+'}</style>');
 }
 
 function appInfo() {

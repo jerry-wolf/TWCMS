@@ -1,9 +1,9 @@
 <?php defined('KONG_PATH') || exit; ?><!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta charset="utf-8" />
 <title>操作提示！</title>
-<style type="text/css">
+<style>
 body,div,ul,li,h1{margin:0;padding:0}
 .kongcont h1,.kongcont ul,.kongcont ul li,.kongcont ul li span{font:14px/1.6 'Microsoft YaHei',Verdana,Arial,sans-serif}
 .kongcont{width:65%;margin:150px auto 0;overflow:hidden;color:#000;border-radius:5px;box-shadow:0 0 20px #555;background:#fff;min-width:300px}

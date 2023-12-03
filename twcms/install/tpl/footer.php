@@ -5,7 +5,7 @@
 	</div>
 </div>
 
-<script src="../../static/js/jquery.js" type="text/javascript"></script>
-<script src="./img/install.js" type="text/javascript"></script>
+<script src="../../static/js/jquery.js"></script>
+<script src="./img/install.js"></script>
 </body>
 </html>
