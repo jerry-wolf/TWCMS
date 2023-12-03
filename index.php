@@ -4,6 +4,11 @@
  * Author: wuzhaohuan <kongphp@gmail.com>
  */
 
+if (str_starts_with($_SERVER['REQUEST_URI'], '/app/')) {
+    $body = file_get_contents('http://www.twcms.com' . $_SERVER['REQUEST_URI']);
+    echo str_replace(['http://www.twcms.com', 'http://www.twcms.cn'], '', $body);
+    exit;
+}
 define('DEBUG', 0);	//调试模式，分三种：0 关闭调试; 1 开启调试; 2 开发调试   注意：开启调试会暴露绝对路径和表前缀
 define('APP_NAME', 'twcms');	//APP名称
 define('TWCMS_PATH', dirname($_SERVER['SCRIPT_FILENAME']).'/');	//TWCMS目录
