@@ -131,7 +131,7 @@ select,.inp{padding:2px;border:1px solid #8E8F8F;background:#FBFBFB;border-radiu
 .tb2 .li .t_c{text-align:center}
 
 /*home*/
-#home{display:grid;gap:8px;grid-template-columns:repeat(auto-fit,minmax(425px,1fr))}
+#home{display:grid;gap:8px;grid-template-columns:repeat(2,1fr)}
 .sort{border:1px solid #9AC4DC;border-radius:5px}
 .sort h1{line-height:27px;text-indent:8px;border-bottom:1px solid #9AC4DC;color:#077AC7;border-radius:5px 5px 0 0;font-size:12px;background:url(../img/bg_x.gif) 0 -91px repeat-x}
 .sort .sc{min-height:192px;_height:192px;padding:5px 0}
@@ -144,6 +144,9 @@ select,.inp{padding:2px;border:1px solid #8E8F8F;background:#FBFBFB;border-radiu
 .sort .sc dd a:hover{border:1px solid #9AC4DC;background:#DEEFFB}
 .sort .sc dd a img{display:block;width:64px;margin:0 auto 4px;border-radius:5px}
 #browser{float:none}
+@media screen and (max-width: 850px) {
+	#home{display:grid;gap:8px;grid-template-columns:1fr}
+}
 
 /*分类*/
 .category dl{width:100%;overflow:hidden;border-bottom:1px solid #B4DBF2}
