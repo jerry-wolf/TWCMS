@@ -1,7 +1,7 @@
 # 用户表，可根据 uid 范围进行分区
 DROP TABLE IF EXISTS pre_user;
 CREATE TABLE pre_user (
-  `uid` i nt unsigned NOT NULL AUTO_INCREMENT,		# 用户ID
+  `uid` int unsigned NOT NULL AUTO_INCREMENT,		# 用户ID
   `username` char(16) NOT NULL DEFAULT '',		# 用户名
   `password` char(32) NOT NULL DEFAULT '',		# 密码	md5(md5() + salt)
   `salt` char(16) NOT NULL DEFAULT '',			# 随机干扰字符，用来混淆密码
