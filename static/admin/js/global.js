@@ -179,6 +179,10 @@ $.twDialog = function(options) {
 	};
 	var o = $.extend(defaults, options);
 
+	if (o.width > document.documentElement.clientWidth) o.width = document.documentElement.clientWidth;
+	if (o.minW > o.width) o.minW = o.width;
+	console.log(o)
+
 	//init
 	$("body").append('<div id="twdialog"><div id="twdialogbox"><div id="twdialog_title"><span></span><a href="javascript:;">close</a></div><div id="twdialog_content"><div style="padding:8px">玩命加载中...</div></div><div id="twdialog_button"><input type="button" value="确定" class="but1 ok"><input type="button" value="取消" class="but1 close"></div></div></div>');
 

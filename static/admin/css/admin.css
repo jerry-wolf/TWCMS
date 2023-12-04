@@ -13,12 +13,12 @@ img{border:0}
 #ifr_refresh{display:inline;float:left;overflow:hidden;width:20px;height:20px;text-indent:-99px;background:url(../img/refresh.png) no-repeat;margin-right:8px}
 #full_screen{display:inline;float:left;overflow:hidden;width:20px;height:20px;text-indent:-99px;background:url(../img/full_screen.png) no-repeat}
 
-.top{display:flex;height:32px}
+.top{display:flex;height:32px;margin-bottom:-2px}
 .top .logo{width:175px}
 .top .nav{flex:auto;height:30px;position:relative;z-index:999}
-.top .nav ul{margin-top:3px}
-.top .nav ul li{float:left;position:relative;z-index:99;width:56px;margin-right:3px}
-.top .nav ul li b{display:block;padding-top:2px;width:56px;height:25px;line-height:25px;text-align:center;color:#fff;font-weight:bold;font-size:13px;cursor:pointer}
+.top .nav ul{display:flex;margin-top:3px}
+.top .nav ul li{flex:auto;position:relative;max-width:56px;z-index:99}
+.top .nav ul li b{display:block;padding-top:2px;height:25px;line-height:25px;text-align:center;color:#fff;font-weight:bold;font-size:13px;cursor:pointer}
 .top .nav ul li b.x{background:url(../img/bg.gif) 0 -112px no-repeat}
 .top .nav ul li b.on{background:url(../img/bg.gif) 0 -139px no-repeat}
 .top .nav ul li dl{display:none;position:absolute;top:27px;left:0;background:url(../img/bg_y.gif) repeat-y;width:100px}
@@ -31,6 +31,12 @@ img{border:0}
 .top .uinfo p a:hover{color:#BD0A01}
 .top .uinfo .ilk{display:inline;float:left;margin:4px 10px 0;height:24px}
 .top .uinfo .ilk a{display:block;overflow:hidden;width:75px;height:22px;text-indent:-999px;background:url(../img/a.gif) no-repeat}
+@media screen and (max-width: 900px) {
+	.top .logo, .top .uinfo .ilk{display:none}
+}
+@media screen and (max-width: 400px) {
+	#hello{display:none} 
+}
 
 .unber{display:flex;flex:auto;width:100%}
 .unber .left{display:flex;flex-direction:column;width:150px;background:url(../img/left_bg.jpg) #fff repeat-y right}
