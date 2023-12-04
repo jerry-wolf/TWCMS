@@ -202,7 +202,7 @@ class product_control extends admin_control {
 				'source' => trim(R('source', 'P')),
 				'dateline' => $dateline ? strtotime($dateline) : $_ENV['_time'],
 				'lasttime' => $_ENV['_time'],
-				'ip' => ip2long($_ENV['_ip']),
+				'ip' => inet_pton($_ENV['_ip']),
 				'iscomment' => intval(R('iscomment', 'P')),
 				'comments' => 0,
 				'imagenum' => $imagenum,

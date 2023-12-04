@@ -76,11 +76,11 @@ class user extends model {
 	public function format(&$user) {
 		if(!$user) return;
 		$user['regdate'] = empty($user['regdate']) ? '0000-00-00 00:00' : date('Y-m-d H:i', $user['regdate']);
-		$user['regip'] = long2ip($user['regip']);
+		$user['regip'] = inet_ntop($user['regip']);
 		$user['logindate'] = empty($user['logindate']) ? '0000-00-00 00:00' : date('Y-m-d H:i', $user['logindate']);
-		$user['loginip'] = long2ip($user['loginip']);
+		$user['loginip'] = inet_ntop($user['loginip']);
 		$user['lastdate'] = empty($user['lastdate']) ? '0000-00-00 00:00' : date('Y-m-d H:i', $user['lastdate']);
-		$user['lastip'] = long2ip($user['lastip']);
+		$user['lastip'] = inet_ntop($user['lastip']);
 
 		// hook usre_model_format_after.php
 	}

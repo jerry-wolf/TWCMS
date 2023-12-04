@@ -54,7 +54,7 @@ class comment_control extends control{
 		$id = (int) R('id', 'P');
 		$content = htmlspecialchars(trim(R('content', 'P')));
 		$author = htmlspecialchars(trim(R('author', 'P')));
-		$ip = ip2long(ip());
+		$ip = inet_pton(ip());
 
 		if(empty($cid) || empty($id)) $this->message(0, '参数不完整！');
 		empty($author) && $this->message(0, '昵称不能为空！');

@@ -49,7 +49,7 @@ class index_control extends admin_control{
 				// 更新登录信息
 				$data['lastip'] = $data['loginip'];
 				$data['lastdate'] = $data['logindate'];
-				$data['loginip'] = ip2long($ip);
+				$data['loginip'] = inet_pton($ip);
 				$data['logindate'] = $_ENV['_time'];
 				$data['logins']++;
 				$user->update($data);

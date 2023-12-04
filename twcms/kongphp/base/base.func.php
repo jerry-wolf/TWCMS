@@ -18,14 +18,14 @@ function runmem() {
 // 安全获取IP
 function ip() {
 	if(isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
-		preg_match('#[\d\.]{7,15}#', $_SERVER['HTTP_X_FORWARDED_FOR'], $mat);
+		preg_match('#[\d\.:]{2,39}#', $_SERVER['HTTP_X_FORWARDED_FOR'], $mat);
 		$ip = $mat[0];
 	}elseif(isset($_SERVER['HTTP_CLIENT_IP'])) {
 		$ip = $_SERVER['HTTP_CLIENT_IP'];
 	}elseif(isset($_SERVER['REMOTE_ADDR'])) {
 		$ip = $_SERVER['REMOTE_ADDR'];
 	}
-	return long2ip(ip2long($ip));
+	return inet_ntop(inet_pton($ip));
 }
 
 // 返回消息JSON
