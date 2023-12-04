@@ -293,15 +293,7 @@ var kpUpload = {
 
 	// 判断是否图片
 	isImg : function(type) {
-		switch (type) {
-			case 'image/jpg':
-			case 'image/jpeg':
-			case 'image/gif':
-			case 'image/png':
-				return true;
-			default:
-				return false;
-		}
+		return type.startsWith('image/');
 	},
 
 	//按顺序ajax上传
