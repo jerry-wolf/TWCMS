@@ -28,9 +28,9 @@ function ip() {
 	return long2ip(ip2long($ip));
 }
 
-// 返回消息JSON (注意：不要含有 " \ 等之类破坏 JSON 结构的字符)
+// 返回消息JSON
 function E($err, $msg, $name = '') {
-	exit('{"err":'.$err.', "msg":"'.$msg.'", "name":"'.$name.'"}');
+	exit(json_encode(compact('err', 'msg', 'name'), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE));
 }
 
 /**
