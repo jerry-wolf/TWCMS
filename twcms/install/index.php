@@ -150,9 +150,9 @@ if($do == 'license') {
 	// 创建创始人
 	$salt = random(16, 3, '0123456789abcdefghijklmnopqrstuvwxyz~!@#$%^&*()_+<>,.'); // 增加破解难度
 	$password = md5(md5($adm_pass).$salt);
-	$ip = inet_pton(ip());
+	$ip = mysqli_real_escape_string($link, inet_pton(ip()));
 	$time = time();
-	$ret = mysqli_query($link, "INSERT INTO `{$tablepre}user` (`uid`, `username`, `password`, `salt`, `groupid`, `email`, `homepage`, `intro`, `regip`, `regdate`, `loginip`, `logindate`, `lastip`, `lastdate`, `contents`, `comments`, `logins`) VALUES (1, '{$adm_user}', '{$password}', '{$salt}', 1, '', '', '', {$ip}, {$time}, 0, 0, 0, 0, 0, 0, 0);");
+	$ret = mysqli_query($link, "INSERT INTO `{$tablepre}user` (`uid`, `username`, `password`, `salt`, `groupid`, `email`, `homepage`, `intro`, `regip`, `regdate`, `loginip`, `logindate`, `lastip`, `lastdate`, `contents`, `comments`, `logins`) VALUES (1, '{$adm_user}', '{$password}', '{$salt}', 1, '', '', '', '{$ip}', {$time}, 0, 0, 0, 0, 0, 0, 0);");
 	js_show('创建创始人 ... '.($ret ? '<i>成功</i>' : '<u>失败</u>'));
 	if(!$ret) exit;
 
