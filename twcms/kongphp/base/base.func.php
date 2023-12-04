@@ -467,20 +467,7 @@ function is_mobile() {
 	$is_mobile = R($_ENV['_config']['cookie_pre'].'is_mobile', 'R');
 	if(isset($is_mobile)) return $is_mobile ? 1 : 0;
 
-	$mobile_agents = array(
-		'iphone','ipod','android','samsung','sony','meizu','ericsson','mot','htc','sgh','lg','sharp','sie-',
-		'philips','panasonic','alcatel','lenovo','blackberry','netfront','symbian','ucweb','windowsce',
-		'palm','operamini','operamobi','openwave','nexusone','cldc','midp','wap','mobile'
-	);
-
-	$is_mobile = 0;
-	$browser = $_SERVER['HTTP_USER_AGENT'];
-	foreach($mobile_agents as $agent) {
-		if(stripos($browser, $agent) !== 0) {
-			$is_mobile = 1;
-			break;
-		}
-	}
+	$is_mobile = (int) str_contains(strtolower($_SERVER['HTTP_USER_AGENT']), 'mobi');
 	_setcookie('is_mobile', $is_mobile);
 	return $is_mobile;
 }
