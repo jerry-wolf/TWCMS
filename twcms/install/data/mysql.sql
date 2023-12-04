@@ -9,11 +9,11 @@ CREATE TABLE pre_user (
   `email` char(40) NOT NULL DEFAULT '',			# EMAIL
   `homepage` char(40) NOT NULL DEFAULT '',		# 主页的URL（外链）
   `intro` text NOT NULL,					# 个人介绍
-  `regip` varchar(16) NOT NULL DEFAULT '0',			# 注册IP
+  `regip` varbinary(16) NOT NULL DEFAULT '0',			# 注册IP
   `regdate` int unsigned NOT NULL DEFAULT '0',	# 注册日期
-  `loginip` varchar(16) NOT NULL DEFAULT '0',			# 登录IP
+  `loginip` varbinary(16) NOT NULL DEFAULT '0',			# 登录IP
   `logindate` int unsigned NOT NULL DEFAULT '0',	# 登录日期
-  `lastip` varchar(16) NOT NULL DEFAULT '0',			# 上次登录IP
+  `lastip` varbinary(16) NOT NULL DEFAULT '0',			# 上次登录IP
   `lastdate` int unsigned NOT NULL DEFAULT '0',	# 上次登录日期
   `contents` int unsigned NOT NULL DEFAULT '0',	# 内容数
   `comments` int unsigned NOT NULL DEFAULT '0',	# 评论数
@@ -103,7 +103,7 @@ CREATE TABLE pre_cms_article (
   `source` varchar(150) NOT NULL DEFAULT '',		# 来源
   `dateline` int unsigned NOT NULL DEFAULT '0',	# 发表时间
   `lasttime` int unsigned NOT NULL DEFAULT '0',	# 更新时间
-  `ip` varchar(16) NOT NULL DEFAULT '0',			# IP
+  `ip` varbinary(16) NOT NULL DEFAULT '0',			# IP
   `iscomment` tinyint unsigned NOT NULL DEFAULT '0',	# 是否禁止评论 (1为禁止 0为允许)
   `comments` int unsigned NOT NULL DEFAULT '0',	# 评论数
   `imagenum` int unsigned NOT NULL DEFAULT '0',	# 图片附件数
@@ -188,7 +188,7 @@ CREATE TABLE pre_cms_article_comment (
   `uid` int unsigned NOT NULL DEFAULT '0',		# 用户ID
   `author` char(30) NOT NULL DEFAULT '',			# 作者，可能不等于 username
   `content` text NOT NULL,				# 评论内容
-  `ip` varchar(16) NOT NULL DEFAULT '0',			# IP
+  `ip` varbinary(16) NOT NULL DEFAULT '0',			# IP
   `dateline` int unsigned NOT NULL DEFAULT '0',	# 发表时间
   PRIMARY KEY  (commentid),
   KEY id (id,commentid),
@@ -231,7 +231,7 @@ CREATE TABLE pre_cms_product (
   `source` varchar(150) NOT NULL DEFAULT '',		# 来源
   `dateline` int unsigned NOT NULL DEFAULT '0',	# 发表时间
   `lasttime` int unsigned NOT NULL DEFAULT '0',	# 更新时间
-  `ip` varchar(16) NOT NULL DEFAULT '0',			# IP
+  `ip` varbinary(16) NOT NULL DEFAULT '0',			# IP
   `iscomment` tinyint unsigned NOT NULL DEFAULT '0',	# 是否禁止评论 (1为禁止 0为允许)
   `comments` int unsigned NOT NULL DEFAULT '0',	# 评论数
   `imagenum` int unsigned NOT NULL DEFAULT '0',	# 图片附件数 (编辑器中的图片+图集)
@@ -317,7 +317,7 @@ CREATE TABLE pre_cms_product_comment (
   `uid` int unsigned NOT NULL DEFAULT '0',		# 用户ID
   `author` char(30) NOT NULL DEFAULT '',			# 作者，可能不等于 username
   `content` text NOT NULL,				# 评论内容
-  `ip` varchar(16) NOT NULL DEFAULT '0',			# IP
+  `ip` varbinary(16) NOT NULL DEFAULT '0',			# IP
   `dateline` int unsigned NOT NULL DEFAULT '0',	# 发表时间
   PRIMARY KEY  (commentid),
   KEY id (id,commentid),
@@ -360,7 +360,7 @@ CREATE TABLE pre_cms_photo (
   `source` varchar(150) NOT NULL DEFAULT '',		# 来源
   `dateline` int unsigned NOT NULL DEFAULT '0',	# 发表时间
   `lasttime` int unsigned NOT NULL DEFAULT '0',	# 更新时间
-  `ip` varchar(16) NOT NULL DEFAULT '0',			# IP
+  `ip` varbinary(16) NOT NULL DEFAULT '0',			# IP
   `iscomment` tinyint unsigned NOT NULL DEFAULT '0',	# 是否禁止评论 (1为禁止 0为允许)
   `comments` int unsigned NOT NULL DEFAULT '0',	# 评论数
   `imagenum` int unsigned NOT NULL DEFAULT '0',	# 图片附件数 (编辑器中的图片+图集)
@@ -446,7 +446,7 @@ CREATE TABLE pre_cms_photo_comment (
   `uid` int unsigned NOT NULL DEFAULT '0',		# 用户ID
   `author` char(30) NOT NULL DEFAULT '',			# 作者，可能不等于 username
   `content` text NOT NULL,				# 评论内容
-  `ip` varchar(16) NOT NULL DEFAULT '0',			# IP
+  `ip` varbinary(16) NOT NULL DEFAULT '0',			# IP
   `dateline` int unsigned NOT NULL DEFAULT '0',	# 发表时间
   PRIMARY KEY  (commentid),
   KEY id (id,commentid),
