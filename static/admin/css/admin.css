@@ -67,6 +67,11 @@ img{border:0}
 	#box_frame{position:absolute;top:57px;left:0;right:0;bottom:0}
 	#box_frame iframe{position:absolute;top:0;left:0;right:0;bottom:0;width:100%;height:100%}
 
+@media screen and (max-width: 720px) {
+	.unber .left{display:none}
+	.unber .right{left:0}
+}
+
 /*ie6*/
 .acp{_width:expression((documentElement.clientWidth < 980) ? "980px" : "auto")}
 .unber,.unber .left,.unber .right{_height:expression(document.body.offsetHeight-30)}
