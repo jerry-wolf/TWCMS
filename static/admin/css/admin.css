@@ -72,14 +72,6 @@ img{border:0}
 	.unber .right{left:0}
 }
 
-/*ie6*/
-.acp{_width:expression((documentElement.clientWidth < 980) ? "980px" : "auto")}
-.unber,.unber .left,.unber .right{_height:expression(document.body.offsetHeight-30)}
-.unber .right,#box_frame{_width:expression(document.body.offsetWidth-150)}
-#box_tab{_width:expression(document.body.offsetWidth-230)}
-#box_frame{_height:expression(document.body.offsetHeight-87)}
-#menu{_height:expression(document.body.offsetHeight-117)}
-
 .fsn #box_opt{top:0}
 .fsn .unber{top:0}
 .fsn .unber .right{left:0}
