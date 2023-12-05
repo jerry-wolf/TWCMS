@@ -7,8 +7,8 @@
 defined('TWCMS_PATH') or exit;
 
 class index_control extends control{
-	public $_cfg = array();	// 全站参数
-	public $_var = array();	// 首页参数
+	public $_cfg = [];	// 全站参数
+	public $_var = [];	// 首页参数
 
 	// hook common_control_after.php
 

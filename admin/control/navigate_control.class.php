@@ -48,7 +48,7 @@ class navigate_control extends admin_control {
 		$navi = R('navi', 'P');
 
 		if(!empty($navi) && is_array($navi)) {
-			$nav_arr = array();
+			$nav_arr = [];
 			$i = 0;
 			foreach($navi as $v) {
 				$cid = intval($v[0]);

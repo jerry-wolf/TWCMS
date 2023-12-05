@@ -33,7 +33,7 @@ class cms_content extends model {
 		$v['url'] = $this->content_url($v['cid'], $v['id'], $v['alias'], $v['dateline']);
 		$v['tags'] = _json_decode($v['tags']);
 		if($v['tags']) {
-			$v['tag_arr'] = array();
+			$v['tag_arr'] = [];
 			foreach($v['tags'] as $name) {
 				$v['tag_arr'][] = array('name'=>$name, 'url'=> $this->tag_url($mid, $name));
 			}

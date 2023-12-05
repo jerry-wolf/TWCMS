@@ -68,7 +68,7 @@ class db_mysql implements db_interface {
 		list($table, $keyarr, $keystr) = $this->key2arr($key);
 		$query = $this->query("SELECT * FROM `{$this->tablepre}$table` WHERE $keystr LIMIT 1", $this->rlink);
 		$data = mysqli_fetch_assoc($query);
-		return $data ? $data : array();
+		return $data ? $data : [];
 	}
 
 	/**
@@ -88,9 +88,9 @@ class db_mysql implements db_interface {
 	public function multi_get($keys) {
 		// 下面这种方式读取比遍历读取效率高
 		$sql = '';
-		$ret = array();
+		$ret = [];
 		foreach($keys as $k) {
-			$ret[$k] = array();	// 按原来的顺序赋值，避免后面的 OR 条件取出时顺序混乱
+			$ret[$k] = [];	// 按原来的顺序赋值，避免后面的 OR 条件取出时顺序混乱
 			list($table, $keyarr, $keystr) = $this->key2arr($k);
 			$sql .= "$keystr OR ";
 		}
@@ -288,9 +288,9 @@ class db_mysql implements db_interface {
 	// 		'user-uid-2'=>array('uid'=>2, 'username'=>'lisi'),
 	// 		'user-uid-3'=>array('uid'=>3, 'username'=>'wangwu'),
 	// 	)
-	public function find_fetch($table, $pri, $where = array(), $order = array(), $start = 0, $limit = 0) {
+	public function find_fetch($table, $pri, $where = [], $order = [], $start = 0, $limit = 0) {
 		$key_arr = $this->find_fetch_key($table, $pri, $where, $order, $start, $limit);
-		if(empty($key_arr)) return array();
+		if(empty($key_arr)) return [];
 		return $this->multi_get($key_arr);
 	}
 
@@ -310,7 +310,7 @@ class db_mysql implements db_interface {
 	// 		'user-uid-2',
 	// 		'user-uid-3',
 	// 	)
-	public function find_fetch_key($table, $pri, $where = array(), $order = array(), $start = 0, $limit = 0) {
+	public function find_fetch_key($table, $pri, $where = [], $order = [], $start = 0, $limit = 0) {
 		$pris = implode(',', $pri);
 		$s = "SELECT $pris FROM `{$this->tablepre}$table`";
 		$s .= $this->arr2where($where);
@@ -324,7 +324,7 @@ class db_mysql implements db_interface {
 		}
 		$s .= ($limit ? " LIMIT $start,$limit" : '');
 
-		$ret = array();
+		$ret = [];
 		$query = $this->query($s, $this->rlink);
 		while($row = mysqli_fetch_assoc($query)) {
 			$keystr = '';
@@ -382,7 +382,7 @@ class db_mysql implements db_interface {
 	 * @param array $where	条件
 	 * @return int
 	 */
-	public function find_count($table, $where = array()) {
+	public function find_count($table, $where = []) {
 		$where = $this->arr2where($where);
 		$arr = $this->fetch_first("SELECT COUNT(*) AS num FROM `{$this->tablepre}$table` $where");
 		return isset($arr['num']) ? intval($arr['num']) : 0;
@@ -506,7 +506,7 @@ class db_mysql implements db_interface {
 	public function fetch_all($sql, $link = NULL) {
 		empty($link) && $link = $this->rlink;
 		$query = $this->query($sql, $link);
-		$ret = array();
+		$ret = [];
 		while($row = mysqli_fetch_assoc($query)) {
 			$ret[] = $row;
 		}
@@ -618,7 +618,7 @@ class db_mysql implements db_interface {
 		}
 
 		$table = $arr[0];
-		$keyarr = array();
+		$keyarr = [];
 		$keystr = '';
 		$len = count($arr);
 		for($i = 1; $i < $len; $i = $i + 2) {

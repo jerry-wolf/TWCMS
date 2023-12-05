@@ -7,8 +7,8 @@
 defined('TWCMS_PATH') or exit;
 
 class runtime extends model {
-	private $data = array();		// 保证唯一性
-	private $changed = array();		// 表示修改过的key
+	private $data = [];		// 保证唯一性
+	private $changed = [];		// 表示修改过的key
 
 	function __construct() {
 		$this->table = 'runtime';	// 表名
@@ -20,13 +20,13 @@ class runtime extends model {
 	// 读取缓存
 	public function get($k) {
 		$arr = parent::get($k);
-		return !empty($arr) && (empty($arr['expiry']) || $arr['expiry'] > $_ENV['_time']) ? _json_decode($arr['v']) : array();
+		return !empty($arr) && (empty($arr['expiry']) || $arr['expiry'] > $_ENV['_time']) ? _json_decode($arr['v']) : [];
 	}
 
 	// 写入缓存
 	public function set($k, $s, $life = 0) {
 		$s = json_encode($s);
-		$arr = array();
+		$arr = [];
 		$arr['k'] = $k;
 		$arr['v'] = $s;
 		$arr['expiry'] = $life ? $_ENV['_time'] + $life : 0;
@@ -55,7 +55,7 @@ class runtime extends model {
 					$cfg['mod_name'] = $mod_name;
 
 					$categorys = $this->category->get_category_db();
-					$cate_arr = array();
+					$cate_arr = [];
 					foreach($categorys as $row) {
 						$cate_arr[$row['cid']] = $row['alias'];
 					}

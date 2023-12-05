@@ -207,7 +207,7 @@ class category_control extends admin_control {
 		}
 
 		// 为频道时，检测是否有下级分类
-		if($data['type'] == 1 && $this->category->find_fetch_key(array('upid' => $data['cid']), array(), 0, 1)) {
+		if($data['type'] == 1 && $this->category->find_fetch_key(array('upid' => $data['cid']), [], 0, 1)) {
 			$data['son_cate'] = 1;
 		}
 

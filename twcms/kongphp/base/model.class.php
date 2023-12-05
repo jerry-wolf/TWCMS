@@ -34,18 +34,18 @@ cache + db + model:
 
 class model{
 	// 每个模型都可以有自己的 db、cache 服务器
-	//public $db_conf = array();
-	//public $cache_conf = array();
+	//public $db_conf = [];
+	//public $cache_conf = [];
 
 	// 必须指定这三项
 	public $table;			// 表名
-	public $pri = array();	// 主键字段，如 ('cid'), ('cid', 'id')
+	public $pri = [];	// 主键字段，如 ('cid'), ('cid', 'id')
 	public $maxid;			// 自增字段
 
 	// 避免重复链接
-	static $dbs = array();
-	static $caches = array();
-	private $unique = array();	// 防止重复查询
+	static $dbs = [];
+	static $caches = [];
+	private $unique = [];	// 防止重复查询
 
 	/**
 	 * 创建一次 db/cache 对象
@@ -199,7 +199,7 @@ class model{
 	// 主键一列：mget(array(1, 2, 3));
 	// 主键多列：mget(array(array(1, 1), array(1, 2), array(1, 3)));
 	public function mget($arr) {
-		$data = array();
+		$data = [];
 		foreach($arr as $k=>&$key) {
 			$key = $this->arr2key($key);
 			if(isset($this->unique[$key])) {
@@ -299,7 +299,7 @@ class model{
 	 * @param int $life		二级缓存时间 (默认为永久)
 	 * @return array
 	 */
-	public function find_fetch($where = array(), $order = array(), $start = 0, $limit = 0, $life = 0) {
+	public function find_fetch($where = [], $order = [], $start = 0, $limit = 0, $life = 0) {
 		return $this->cache_db_find_fetch($this->table, $this->pri, $where, $order, $start, $limit, $life);
 	}
 
@@ -312,7 +312,7 @@ class model{
 	 * @param int $life		二级缓存时间 (默认为永久)
 	 * @return array
 	 */
-	public function find_fetch_key($where = array(), $order = array(), $start = 0, $limit = 0, $life = 0) {
+	public function find_fetch_key($where = [], $order = [], $start = 0, $limit = 0, $life = 0) {
 		return $this->cache_db_find_fetch_key($this->table, $this->pri, $where, $order, $start, $limit, $life);
 	}
 
@@ -323,7 +323,7 @@ class model{
 	 * @return int	返回影响的记录行数
 	 */
 	public function find_update($where, $data, $lowprority = FALSE) {
-		$this->unique = array();
+		$this->unique = [];
 		if($this->cache_conf['enable']) {
 			$n = $this->find_count($where);
 			if($n > 2000) {
@@ -345,7 +345,7 @@ class model{
 	 * @return int	返回影响的记录行数
 	 */
 	public function find_delete($where, $lowprority = FALSE) {
-		$this->unique = array();
+		$this->unique = [];
 		if($this->cache_conf['enable']) {
 			$n = $this->find_count($where);
 			if($n > 2000) {
@@ -379,7 +379,7 @@ class model{
 	 * @param array $where	条件
 	 * @return int	返回条数
 	 */
-	public function find_count($where = array()) {
+	public function find_count($where = []) {
 		return $this->db->find_count($this->table, $where);
 	}
 
@@ -424,7 +424,7 @@ class model{
 		$s = $this->table;
 		foreach($this->pri as $k=>$v) {
 			if(!isset($arr[$k])) {
-				$err = array();
+				$err = [];
 				foreach($this->pri as $pk=>$pv) {
 					$var = isset($arr[$pk]) ? $arr[$pk] : 'null';
 					$err[] = "'$pv => $var";
@@ -613,7 +613,7 @@ class model{
 	 * @param int $life		二级缓存时间 (默认为永久)
 	 * @return array
 	 */
-	public function cache_db_find_fetch($table, $pri, $where = array(), $order = array(), $start = 0, $limit = 0, $life = 0) {
+	public function cache_db_find_fetch($table, $pri, $where = [], $order = [], $start = 0, $limit = 0, $life = 0) {
 		// 如果是 mongodb 就直接取数据，不支持缓存
 		if($this->db_conf['type'] == 'mongodb') {
 			return $this->db->find_fetch($table, $pri, $where, $order, $start, $limit);
@@ -634,7 +634,7 @@ class model{
 	 * @param int $life		二级缓存时间 (默认为永久)
 	 * @return array
 	 */
-	public function cache_db_find_fetch_key($table, $pri, $where = array(), $order = array(), $start = 0, $limit = 0, $life = 0) {
+	public function cache_db_find_fetch_key($table, $pri, $where = [], $order = [], $start = 0, $limit = 0, $life = 0) {
 		if($this->cache_conf['enable'] && $this->cache_conf['l2_cache'] === 1) {
 			$key = $table.'_'.md5(serialize(array($pri, $where, $order, $start, $limit)));
 			$keys = $this->cache->l2_cache_get($key);

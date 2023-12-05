@@ -32,8 +32,8 @@ class comment_control extends admin_control {
 		$this->assign('total', $total);
 
 		// 获取评论列表
-		$id_arr = array();
-		$comment_arr = $this->cms_content_comment->list_arr(array(), -1, ($page-1)*$pagenum, $pagenum, $total);
+		$id_arr = [];
+		$comment_arr = $this->cms_content_comment->list_arr([], -1, ($page-1)*$pagenum, $pagenum, $total);
 		foreach($comment_arr as &$v) {
 			$this->cms_content_comment->format($v, 'Y-m-d H:i:s', 0);
 			$id_arr[] = $v['id'];

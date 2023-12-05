@@ -145,7 +145,7 @@ function _json_encode($arr) {
 function _array_multisort(&$data, $c_1, $c_2 = true, $a_1 = 1, $a_2 = 1) {
 	if(!is_array($data)) return $data;
 
-	$col_1 = $col_2 = array();
+	$col_1 = $col_2 = [];
 	foreach($data as $key => $row) {
 		$col_1[$key] = $row[$c_1];
 		$col_2[$key] = $c_2===true ? $key : $row[$c_2];
@@ -172,7 +172,7 @@ function _int(&$c, $k, $v = 0) {
 function _scandir($dir) {
 	if(function_exists('scandir')) return scandir($dir);	// 有些服务器禁用了scandir
 	$dh = opendir($dir);
-	$arr = array();
+	$arr = [];
 	while($file = readdir($dh)) {
 		if($file == '.' || $file == '..') continue;
 		$arr[] = $file;
@@ -333,7 +333,7 @@ function safe_str($s, $ext = '') {
 
 // 获取下级所有目录名 （严格限制目录名只能是 数字 字母 _）
 function get_dirs($path, $fullpath = false) {
-	$arr = array();
+	$arr = [];
 	$dh = opendir($path);
 	while($dir = readdir($dh)) {
 		if(preg_match('#\W#', $dir) || !is_dir($path.$dir)) continue;
@@ -380,7 +380,7 @@ function str_auth($string, $operation = 'DECODE', $key = '', $expiry = 0) {
 	$result = '';
 	$box = range(0, 255);
 
-	$rndkey = array();
+	$rndkey = [];
 	for($i = 0; $i <= 255; $i++) {
 		$rndkey[$i] = ord($cryptkey[$i % $key_length]);
 	}

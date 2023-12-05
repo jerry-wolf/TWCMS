@@ -52,7 +52,7 @@ function kp_block_list_flag($conf) {
 
 	// 读取内容列表
 	$key_arr = $run->cms_content_flag->find_fetch($where, array('id' => $orderway), $start, $limit);
-	$keys = array();
+	$keys = [];
 	foreach($key_arr as $v) {
 		$keys[] = $v['id'];
 	}

@@ -6,8 +6,8 @@
  */
 
 class view{
-	private $vars = array();			//模板变量集合
-	private $head_arr = array();		//模板头部代码数组
+	private $vars = [];			//模板变量集合
+	private $head_arr = [];		//模板头部代码数组
 
 	public function __construct() {
 		$_ENV['_theme'] = 'default';	//主题目录
@@ -120,7 +120,7 @@ class view{
 		$config = $this->rep_double($config);
 
 		//解析设置数组并生成执行函数
-		$config_arr = array();
+		$config_arr = [];
 		preg_match_all('#([a-zA-Z_]\w*)="(.*?)" #', $config.' ', $m);
 		foreach($m[2] as $k=>$v) {
 			if(isset($v)) $config_arr[strtolower($m[1][$k])] = addslashes($v);

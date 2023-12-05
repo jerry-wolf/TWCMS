@@ -38,7 +38,7 @@ class product_control extends admin_control {
 			$total = isset($categorys['count']) ? $categorys['count'] : 0;
 			$urlstr = '-cid-'.$cid;
 		}else{
-			$where = array();
+			$where = [];
 			$total = $this->cms_content->count();
 			$urlstr = '';
 		}
@@ -94,11 +94,11 @@ class product_control extends admin_control {
 				!empty($data['cid']) && $cid = $data['cid'];
 				$data['pic_src'] = empty($data['pic']) ? '../static/img/nopic.gif' : '../'.$data['pic'];
 				empty($data['author']) && $data['author'] = $this->_user['username'];
-				$data['flags'] = empty($data['flag']) ? array() : $data['flag'];
+				$data['flags'] = empty($data['flag']) ? [] : $data['flag'];
 				!empty($data['images']) && $data['images'] = (array)$data['images'];
 				$data['content'] = htmlspecialchars($data['content']);
 			}else{
-				$data['flags'] = array();
+				$data['flags'] = [];
 				$data['pic_src'] = '../static/img/nopic.gif';
 				$data['author'] = $this->_user['username'];
 				$data['views'] = 0;
@@ -152,7 +152,7 @@ class product_control extends admin_control {
 			$tags = trim(R('tags', 'P'), ", \t\n\r\0\x0B");
 			$tags_arr = explode(',', $tags);
 			$this->cms_content_tag->table = 'cms_'.$table.'_tag';
-			$tagdatas = $tags = array();
+			$tagdatas = $tags = [];
 			for($i=0; isset($tags_arr[$i]) && $i<5; $i++) {
 				$name = trim($tags_arr[$i]);
 				if($name) {
@@ -369,7 +369,7 @@ class product_control extends admin_control {
 			}
 
 			// 比较属性变化
-			$flags_old = array();
+			$flags_old = [];
 			if($data['flags']) {
 				$flags_old = explode(',', $data['flags']);
 				foreach($flags as $flag) {
@@ -382,7 +382,7 @@ class product_control extends admin_control {
 			$tags = trim(R('tags', 'P'), ", \t\n\r\0\x0B");
 			$tags_new = explode(',', $tags);
 			$tags_old = (array)_json_decode($data['tags']);
-			$tags_arr = $tags = array();
+			$tags_arr = $tags = [];
 			foreach($tags_new as $tagname) {
 				$key = array_search($tagname, $tags_old);
 				if($key === false) {
@@ -395,7 +395,7 @@ class product_control extends admin_control {
 
 			// 标签预处理，最多支持5个标签
 			$this->cms_content_tag->table = 'cms_'.$table.'_tag';
-			$tagdatas = array();
+			$tagdatas = [];
 			for($i=0; isset($tags_arr[$i]) && $i<5; $i++) {
 				$name = trim($tags_arr[$i]);
 				if($name) {
@@ -646,7 +646,7 @@ class product_control extends admin_control {
 
 	// 自动生成缩略图
 	private function auto_pic($table, $uid, $id = 0) {
-		$pic_arr = $this->cms_content_attach->find_fetch(array('id'=>$id, 'uid'=>$uid, 'isimage'=>1), array(), 0, 1);
+		$pic_arr = $this->cms_content_attach->find_fetch(array('id'=>$id, 'uid'=>$uid, 'isimage'=>1), [], 0, 1);
 		$pic_arr = array_pop($pic_arr);
 		$cfg = $this->runtime->xget();
 		$path = 'upload/'.$table.'/'.$pic_arr['filepath'];
@@ -683,7 +683,7 @@ class product_control extends admin_control {
 	// 远程图片处理 (如果抓取失败则不替换)
 	// $conf 用到4个参数 hosts preUri cfg upDir
 	private function img_replace($mat) {
-		static $uris = array();
+		static $uris = [];
 		$uri = $mat[1];
 		$conf = &$_ENV['_prc_arg'];
 

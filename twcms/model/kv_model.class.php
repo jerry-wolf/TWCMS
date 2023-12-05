@@ -7,8 +7,8 @@
 defined('TWCMS_PATH') or exit;
 
 class kv extends model {
-	private $data = array();		// 保证唯一性
-	private $changed = array();		// 表示修改过的key
+	private $data = [];		// 保证唯一性
+	private $changed = [];		// 表示修改过的key
 
 	function __construct() {
 		$this->table = 'kv';		// 表名
@@ -20,13 +20,13 @@ class kv extends model {
 	// 读取 kv 值
 	public function get($k) {
 		$arr = parent::get($k);
-		return !empty($arr) && (empty($arr['expiry']) || $arr['expiry'] > $_ENV['_time']) ? _json_decode($arr['v']) : array();
+		return !empty($arr) && (empty($arr['expiry']) || $arr['expiry'] > $_ENV['_time']) ? _json_decode($arr['v']) : [];
 	}
 
 	// 写入 kv 值
 	public function set($k, $s, $life = 0) {
 		$s = json_encode($s);
-		$arr = array();
+		$arr = [];
 		$arr['k'] = $k;
 		$arr['v'] = $s;
 		$arr['expiry'] = $life ? $_ENV['_time'] + $life : 0;

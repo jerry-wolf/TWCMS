@@ -148,7 +148,7 @@ class upload{
 	// 获取允许上传的扩展名
 	private function getAllowExt() {
 		$conf = explode(',', $this->config['allowExt']);
-		$arr = array();
+		$arr = [];
 		foreach($conf as $v) {
 			$v = trim($v);
 			if($v) $arr[] = $v;

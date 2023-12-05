@@ -230,13 +230,13 @@ class plugin_control extends admin_control {
 
 	// 检查版本
 	private function get_version($dir) {
-		$cfg = is_file(PLUGIN_PATH.$dir.'/conf.php') ? (array)include(PLUGIN_PATH.$dir.'/conf.php') : array();
+		$cfg = is_file(PLUGIN_PATH.$dir.'/conf.php') ? (array)include(PLUGIN_PATH.$dir.'/conf.php') : [];
 		return isset($cfg['cms_version']) ? $cfg['cms_version'] : 0;
 	}
 
 	// 获取插件配置信息
 	private function get_plugin_config() {
-		return is_file(CONFIG_PATH.'plugin.inc.php') ? (array)include(CONFIG_PATH.'plugin.inc.php') : array();
+		return is_file(CONFIG_PATH.'plugin.inc.php') ? (array)include(CONFIG_PATH.'plugin.inc.php') : [];
 	}
 
 	// 设置插件配置信息

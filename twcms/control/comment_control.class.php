@@ -7,8 +7,8 @@
 defined('TWCMS_PATH') or exit;
 
 class comment_control extends control{
-	public $_cfg = array();	// 全站参数
-	public $_var = array();	// 内容页参数
+	public $_cfg = [];	// 全站参数
+	public $_var = [];	// 内容页参数
 
 	// hook common_control_after.php
 
@@ -130,7 +130,7 @@ class comment_control extends control{
 		$key = $orderway == 1 ? '>' : '<';
 		$where = array('id' => $id, 'commentid' => array($key => $commentid));
 		$this->cms_content_comment->table = 'cms_'.$cates['table'].'_comment';
-		$ret = array();
+		$ret = [];
 		$ret['list_arr'] = $this->cms_content_comment->find_fetch($where, array('commentid' => $orderway), 0, $pagenum);
 		foreach($ret['list_arr'] as &$v) {
 			$this->cms_content_comment->format($v, $dateformat, $humandate);

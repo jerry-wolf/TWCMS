@@ -32,7 +32,7 @@ function kp_block_global_cate($conf) {
 		// 影响数据库性能
 		$where = array('cid' => array("IN" => $run->_var['son_cids']));
 		$total = 0;
-		$cate_arr = array();
+		$cate_arr = [];
 		foreach($run->_var['son_cids'] as $v) {
 			$cate_arr[$v] = $run->category->get_cache($v);
 			$total += $cate_arr[$v]['count'];

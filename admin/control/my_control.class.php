@@ -16,7 +16,7 @@ class my_control extends admin_control {
 		$used_array = $this->get_used();
 
 		//服务器信息
-		$info = array();
+		$info = [];
 		$is_ini_get = function_exists('ini_get');	// 考虑禁用 ini_get 的服务器
 		$info['os'] = function_exists('php_uname') ? php_uname() : '未知';
 		$info['software'] = R('SERVER_SOFTWARE', 'S');
@@ -29,7 +29,7 @@ class my_control extends admin_control {
 		$info['other'] = $this->get_other();
 
 		// 综合统计
-		$stat = array();
+		$stat = [];
 		// $stat['user'] = $this->user->count();
 		$stat['category'] = $this->category->count();
 

@@ -35,7 +35,7 @@ function kp_block_list_top($conf) {
 		// 当cid为0时，根据mid确定table
 		$table_arr = &$run->_cfg['table_arr'];
 		$table = isset($table_arr[$mid]) ? $table_arr[$mid] : 'article';
-		$where = array();
+		$where = [];
 	}else{
 		$cate_arr = $run->category->get_cache($cid);
 		$table = &$cate_arr['table'];
@@ -47,7 +47,7 @@ function kp_block_list_top($conf) {
 		$key_arr = $run->cms_content_views->find_fetch($where, array($orderby => $orderway), $start, $limit, $life);
 
 		$table_key .= '-id-';
-		$keys = array();
+		$keys = [];
 		foreach($key_arr as $v) {
 			$keys[] = $v['id'];
 		}
@@ -64,7 +64,7 @@ function kp_block_list_top($conf) {
 		$key_arr = $run->cms_content_comment_sort->find_fetch_key($where, array($orderby => $orderway), $start, $limit);
 
 		$table_key .= '-id-';
-		$keys = array();
+		$keys = [];
 		foreach($key_arr as $v) {
 			$keys[] = str_replace($table_key, '', $v);
 		}

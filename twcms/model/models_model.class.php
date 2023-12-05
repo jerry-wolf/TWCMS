@@ -7,7 +7,7 @@
 defined('TWCMS_PATH') or exit;
 
 class models extends model {
-	private $data = array();		// 防止重复查询
+	private $data = [];		// 防止重复查询
 
 	function __construct() {
 		$this->table = 'models';	// 表名
@@ -31,7 +31,7 @@ class models extends model {
 		}
 
 		$models_arr = $this->get_models();
-		$arr = array();
+		$arr = [];
 		foreach ($models_arr as $v) {
 			$arr[$v['mid']] = $v['name'];
 		}
@@ -46,7 +46,7 @@ class models extends model {
 
 		$models_arr = $this->get_models();
 		unset($models_arr[1]);
-		$arr = array();
+		$arr = [];
 		foreach ($models_arr as $v) {
 			$arr[$v['mid']] = $v['tablename'];
 		}

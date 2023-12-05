@@ -37,7 +37,7 @@ function kp_block_list($conf) {
 		$table_arr = &$run->_cfg['table_arr'];
 		$table = isset($table_arr[$mid]) ? $table_arr[$mid] : 'article';
 
-		$where = array();
+		$where = [];
 	}else{
 		$cate_arr = $run->category->get_cache($cid);
 		if(empty($cate_arr)) return;

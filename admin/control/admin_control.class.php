@@ -7,10 +7,10 @@
 defined('TWCMS_PATH') or exit;
 
 class admin_control extends control {
-	public $_user = array();	// 用户
-	public $_group = array();	// 用户组
+	public $_user = [];	// 用户
+	public $_group = [];	// 用户组
 
-	public $_navs = array();	// 导航
+	public $_navs = [];	// 导航
 	public $_pkey = '';			// 父级
 	public $_ukey = '';			// 当前
 	public $_title = '';		// 标题
@@ -108,7 +108,7 @@ class admin_control extends control {
 			/*
 			提示：$purviews 返回的结果如下，如果有特别需求，开发者可根据下面的结构进行扩展。
 			array(
-				'navs' => array(),	//显示的导航数组
+				'navs' => [],	//显示的导航数组
 				'whitelist' => array('content'=>array('index'=>1,'comment'=>1))	//白名单，允许执行的权限
 			)
 			*/

@@ -74,8 +74,8 @@ class core{
 		spl_autoload_register(array('core', 'autoload_handler'));	// 设置自动包含类文件方法
 
 		// 初始化全局变量
-		$_ENV['_sqls'] = array();	// debug 时使用
-		$_ENV['_include'] = array();	// autoload 时使用
+		$_ENV['_sqls'] = [];	// debug 时使用
+		$_ENV['_include'] = [];	// autoload 时使用
 		$_ENV['_time'] = isset($_SERVER['REQUEST_TIME']) ? $_SERVER['REQUEST_TIME'] : time();
 		$_ENV['_ip'] = ip();
 		$_ENV['_sqlnum'] = 0;
@@ -133,7 +133,7 @@ class core{
 			}elseif(!empty($_SERVER['PATH_INFO'])) {
 				$u = $_SERVER['PATH_INFO'];
 			}else{
-				$_GET = array();
+				$_GET = [];
 				$u = $_SERVER["QUERY_STRING"];
 			}
 
@@ -355,15 +355,15 @@ class core{
 	 * @return array('not_install', 'disable', 'enable')
 	 */
 	public static function get_plugins($force = 0) {
-		static $plugins = array();
+		static $plugins = [];
 		if(!empty($plugins) && !$force) return $plugins;
 
-		if(!is_dir(PLUGIN_PATH)) return array();
+		if(!is_dir(PLUGIN_PATH)) return [];
 		$plugin_dirs = get_dirs(PLUGIN_PATH);
 
-		$plugin_arr = is_file(CONFIG_PATH.'plugin.inc.php') ? (array)include(CONFIG_PATH.'plugin.inc.php') : array();
+		$plugin_arr = is_file(CONFIG_PATH.'plugin.inc.php') ? (array)include(CONFIG_PATH.'plugin.inc.php') : [];
 		foreach($plugin_dirs as $dir) {
-			$cfg = is_file(PLUGIN_PATH.$dir.'/conf.php') ? (array)include(PLUGIN_PATH.$dir.'/conf.php') : array();
+			$cfg = is_file(PLUGIN_PATH.$dir.'/conf.php') ? (array)include(PLUGIN_PATH.$dir.'/conf.php') : [];
 
 			$cfg['rank'] = isset($cfg['rank']) ? $cfg['rank'] : 100;
 

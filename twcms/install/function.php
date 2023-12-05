@@ -6,9 +6,9 @@
 
 // 递归检测目录/文件是否写
 function _dir_write($dir, $clear = FALSE) {
-	static $ret = array();
+	static $ret = [];
 
-	if($clear) $ret = array('yes'=>array(), 'no'=>array());
+	if($clear) $ret = array('yes'=>[], 'no'=>[]);
 
 	if(!is_dir($dir) || _no_writable($dir) || !$dh = opendir($dir)) {
 		$ret['no'][] = array($dir, substr(sprintf('%o', fileperms($dir)), -4));
@@ -57,7 +57,7 @@ function get_webdir() {
 function split_sql($sql, $tablepre) {
 	$sql = str_replace('pre_', $tablepre, $sql);
 	$sql = str_replace("\r", '', $sql);
-	$ret = array();
+	$ret = [];
 	$num = 0;
 	$queriesarray = explode(";\n", trim($sql));
 	unset($sql);

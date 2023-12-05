@@ -29,7 +29,7 @@ function kp_block_global_search($conf) {
 	$run->cms_content->table = 'cms_'.$table;
 
 	// 不建议内容数大于1W的网站使用数据库搜索
-	if($run->cms_content->count() > $maxcount) return array('total'=> 0, 'pages'=> '', 'list'=> array());
+	if($run->cms_content->count() > $maxcount) return array('total'=> 0, 'pages'=> '', 'list'=> []);
 
 	// 初始分页
 	$total = $run->cms_content->find_count($where);

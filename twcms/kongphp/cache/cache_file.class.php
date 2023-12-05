@@ -23,7 +23,7 @@ class cache_file implements cache_interface{
 	 * @return array
 	 */
 	public function multi_get($keys) {
-		$data = array();
+		$data = [];
 		foreach($keys as $k) {
 			$data[$k] = $this->get($k);
 		}

@@ -17,12 +17,12 @@ interface db_interface {
 	public function truncate($table);
 	public function version();
 
-	public function find_fetch($table, $pri, $where = array(), $order = array(), $start = 0, $limit = 0);
-	public function find_fetch_key($table, $pri, $where = array(), $order = array(), $start = 0, $limit = 0);
+	public function find_fetch($table, $pri, $where = [], $order = [], $start = 0, $limit = 0);
+	public function find_fetch_key($table, $pri, $where = [], $order = [], $start = 0, $limit = 0);
 	public function find_update($table, $where, $data, $lowprority = FALSE);
 	public function find_delete($table, $where, $lowprority = FALSE);
 	public function find_maxid($key);
-	public function find_count($table, $where = array());
+	public function find_count($table, $where = []);
 
 	public function index_create($table, $index);
 	public function index_drop($table, $index);

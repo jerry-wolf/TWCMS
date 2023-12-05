@@ -33,8 +33,8 @@ class kp_zip {
 }
 
 class php_zip {
-	var $datasec      = array();
-	var $ctrl_dir     = array();
+	var $datasec      = [];
+	var $ctrl_dir     = [];
 	var $eof_ctrl_dir = "\x50\x4b\x05\x06\x00\x00\x00\x00";
 	var $old_offset   = 0;
 
@@ -145,7 +145,7 @@ class php_zip {
 
 class php_unzip {
 	var $Comment = '';
-	var $Entries = array();
+	var $Entries = [];
 	var $Name = '';
 	var $Size = 0;
 	var $Time = 0;
@@ -183,7 +183,7 @@ class php_unzip {
 	}
 
 	function ReadFile($in_FileName) {
-		$this->Entries = array();
+		$this->Entries = [];
 		$this->Name = $in_FileName;
 		$this->Time = filemtime($in_FileName);
 		$this->Size = filesize($in_FileName);
@@ -204,7 +204,7 @@ class php_unzip {
 		array_shift($aE);
 
 		foreach($aE as $vZ) {
-			$aI = array();
+			$aI = [];
 			$aI['E']  = 0;
 			$aI['EM'] = '';
 			$aP = unpack('v1VN/v1GPF/v1CM/v1FT/v1FD/V1CRC/V1CS/V1UCS/v1FNL', $vZ);

@@ -17,7 +17,7 @@ class theme_control extends admin_control {
 
 		// 启用的主题放在第一
 		if(isset($themes[$k])) {
-			$tmp = array();
+			$tmp = [];
 			$tmp[$k] = $themes[$k];
 			unset($themes[$k]);
 			$themes = $tmp + $themes;
@@ -117,7 +117,7 @@ class theme_control extends admin_control {
 	private function get_theme_all() {
 		$dir = APP_PATH.'view/';
 		$files = _scandir($dir);
-		$themes = array();
+		$themes = [];
 		foreach($files as $file) {
 			if(preg_match('/\W/', $file)) continue;
 			$path = $dir.'/'.$file;
@@ -131,7 +131,7 @@ class theme_control extends admin_control {
 
 	// 读取主题信息
 	private function get_theme_info($lines) {
-		$res = array();
+		$res = [];
 		foreach($lines as $str) {
 			$arr = explode('=', trim($str));
 			$k = trim($arr[0]);

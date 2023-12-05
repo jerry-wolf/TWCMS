@@ -11,7 +11,7 @@ class setting_control extends admin_control {
 	public function index() {
 		if(empty($_POST)) {
 			$cfg = $this->kv->xget('cfg');
-			$input = array();
+			$input = [];
 			$input['webname'] = form::get_text('webname', $cfg['webname']);
 			$input['webdomain'] = form::get_text('webdomain', $cfg['webdomain']);
 			$input['webdir'] = form::get_text('webdir', $cfg['webdir']);
@@ -47,7 +47,7 @@ class setting_control extends admin_control {
 	public function seo() {
 		if(empty($_POST)) {
 			$cfg = $this->kv->xget('cfg');
-			$input = array();
+			$input = [];
 			$input['seo_title'] = form::get_text('seo_title', $cfg['seo_title']);
 			$input['seo_keywords'] = form::get_text('seo_keywords', $cfg['seo_keywords']);
 			$input['seo_description'] = form::get_textarea('seo_description', $cfg['seo_description']);
@@ -227,7 +227,7 @@ class setting_control extends admin_control {
 				}
 			}
 
-			$input = array();
+			$input = [];
 			$input['parseurl'] = form::loop('radio', 'parseurl', array('0'=>'动态', '1'=>'伪静态'), $parseurl, ' &nbsp; &nbsp;');
 			$input['link_show'] = form::get_text('link_show', $cfg['link_show'], 'inp wa');
 			$input['link_cate_end'] = form::get_text('link_cate_end', $cfg['link_cate_end'], 'inp wb');
@@ -319,7 +319,7 @@ class setting_control extends admin_control {
 	public function attach() {
 		if(empty($_POST)) {
 			$cfg = $this->kv->xget('cfg');
-			$input = array();
+			$input = [];
 			$input['up_img_ext'] = form::get_text('up_img_ext', $cfg['up_img_ext'], 'inp wa');
 			$input['up_img_max_size'] = form::get_number('up_img_max_size', $cfg['up_img_max_size'], 'inp ws');
 			$input['up_file_ext'] = form::get_text('up_file_ext', $cfg['up_file_ext'], 'inp wa');
@@ -349,7 +349,7 @@ class setting_control extends admin_control {
 	public function image() {
 		if(empty($_POST)) {
 			$cfg = $this->kv->xget('cfg');
-			$input = array();
+			$input = [];
 			$input['thumb_article_w'] = form::get_number('thumb_article_w', $cfg['thumb_article_w'], 'inp ws');
 			$input['thumb_article_h'] = form::get_number('thumb_article_h', $cfg['thumb_article_h'], 'inp ws');
 			$input['thumb_product_w'] = form::get_number('thumb_product_w', $cfg['thumb_product_w'], 'inp ws');

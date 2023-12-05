@@ -38,7 +38,7 @@ function kp_block_global_blog($conf) {
 	$pages = pages($page, $maxpage, $run->cms_content->index_url($mid));
 
 	// 读取内容列表
-	$list_arr = $run->cms_content->list_arr(array(), 'id', -1, ($page-1)*$pagenum, $pagenum, $total);
+	$list_arr = $run->cms_content->list_arr([], 'id', -1, ($page-1)*$pagenum, $pagenum, $total);
 	foreach($list_arr as &$v) {
 		$run->cms_content->format($v, $mid, $dateformat, $titlenum, $intronum);
 	}

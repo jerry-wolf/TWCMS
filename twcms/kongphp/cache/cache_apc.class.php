@@ -22,7 +22,7 @@ class cache_apc implements cache_interface{
 	 * @return array
 	 */
 	public function multi_get($keys) {
-		$data = array();
+		$data = [];
 		foreach($keys as $k) {
 			$data[$k] = apc_fetch($k);
 		}

@@ -17,7 +17,7 @@ function kp_block_taglike($conf) {
 
 	// hook kp_block_taglike_before.php
 
-	if(empty($_show['tags'])) return array('list'=> array());
+	if(empty($_show['tags'])) return array('list'=> []);
 
 	$titlenum = isset($conf['titlenum']) ? (int)$conf['titlenum'] : 0;
 	$intronum = isset($conf['intronum']) ? (int)$conf['intronum'] : 0;
@@ -38,7 +38,7 @@ function kp_block_taglike($conf) {
 	// 读取内容ID
 	$run->cms_content_tag_data->table = 'cms_'.$table.'_tag_data';
 	$tag_arr = $run->cms_content_tag_data->find_fetch(array('tagid'=>$tagid), array('id'=>$orderway), $start, $limit);
-	$keys = array();
+	$keys = [];
 	foreach($tag_arr as $v) {
 		$keys[] = $v['id'];
 	}

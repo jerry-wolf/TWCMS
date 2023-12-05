@@ -38,7 +38,7 @@ function kp_block_listeach($conf) {
 			$cid_arr = $_var['son_list'];
 			$table = $_var['table'];
 		}else{
-			return array();
+			return [];
 		}
 	}
 
@@ -46,7 +46,7 @@ function kp_block_listeach($conf) {
 	$run->cms_content->table = 'cms_'.$table;
 
 	// 读取内容列表
-	$ret = array();
+	$ret = [];
 	foreach($cid_arr as $_cid => $cids) {
 		// 读取分类内容
 		$cate_arr = $run->category->get_cache($_cid);

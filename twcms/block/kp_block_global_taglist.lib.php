@@ -31,7 +31,7 @@ function kp_block_global_taglist($conf) {
 	// 读取内容ID
 	$run->cms_content_tag_data->table = 'cms_'.$table.'_tag_data';
 	$tag_arr = $run->cms_content_tag_data->list_arr($tagid, $orderway, ($page-1)*$pagenum, $pagenum, $total);
-	$keys = array();
+	$keys = [];
 	foreach($tag_arr as $v) {
 		$keys[] = $v['id'];
 	}

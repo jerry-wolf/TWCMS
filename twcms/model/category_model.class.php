@@ -7,7 +7,7 @@
 defined('TWCMS_PATH') or exit;
 
 class category extends model {
-	private $data = array();		// 防止重复查询
+	private $data = [];		// 防止重复查询
 
 	function __construct() {
 		$this->table = 'category';	// 表名
@@ -93,7 +93,7 @@ class category extends model {
 
 	// 检查是否有下级分类
 	public function check_is_son($upid) {
-		return $this->find_fetch_key(array('upid' => $upid), array(), 0, 1) ? TRUE : FALSE;
+		return $this->find_fetch_key(array('upid' => $upid), [], 0, 1) ? TRUE : FALSE;
 	}
 
 	// 从数据库获取分类
@@ -104,8 +104,8 @@ class category extends model {
 
 		// hook category_model_get_category_db_before.php
 
-		$arr = array();
-		$tmp = $this->find_fetch(array(), array('orderby'=>1));
+		$arr = [];
+		$tmp = $this->find_fetch([], array('orderby'=>1));
 		foreach($tmp as $v) {
 			$arr[$v['cid']] = $v;
 		}
@@ -121,14 +121,14 @@ class category extends model {
 			return $this->data['category_tree'];
 		}
 
-		$this->data['category_tree'] = array();
+		$this->data['category_tree'] = [];
 		$tmp = $this->get_category_db();
 
 		// 格式化为树状结构 (会舍弃不合格的结构)
 		foreach($tmp as $v) {
 			$tmp[$v['upid']]['son'][$v['cid']] = &$tmp[$v['cid']];
 		}
-		$this->data['category_tree'] = isset($tmp['0']['son']) ? $tmp['0']['son'] : array();
+		$this->data['category_tree'] = isset($tmp['0']['son']) ? $tmp['0']['son'] : [];
 
 		// 格式化为树状结构 (不会舍弃不合格的结构)
 		// foreach($tmp as $v) {
@@ -151,7 +151,7 @@ class category extends model {
 
 	// 递归转换为二维数组
 	public function to_array($data, $pre = 1) {
-		static $arr = array();
+		static $arr = [];
 
 		foreach($data as $k => $v) {
 			$v['pre'] = $pre;
@@ -182,7 +182,7 @@ class category extends model {
 
 	// 获取频道分类下级列表分类的cid
 	public function get_cids_by_upid($upid, $mid) {
-		$arr = array();
+		$arr = [];
 		$tmp = $this->get_category_db();
 		if($upid != 0 && !isset($tmp[$upid])) return FALSE;
 
@@ -197,7 +197,7 @@ class category extends model {
 		if(isset($tmp[$upid]['son'])) {
 			foreach($tmp[$upid]['son'] as $k => $v) {
 				if($v['type'] == 1) {
-					$arr[$k] = isset($v['son']) ? self::recursion_cid($v['son']) : array();
+					$arr[$k] = isset($v['son']) ? self::recursion_cid($v['son']) : [];
 				}elseif($v['type'] == 0) {
 					$arr[$k] = 1;
 				}
@@ -209,7 +209,7 @@ class category extends model {
 
 	// 递归获取下级分类全部 cid
 	public function recursion_cid(&$data) {
-		$arr = array();
+		$arr = [];
 		foreach($data as $k => $v) {
 			if(isset($v['son'])) {
 				$arr2 = self::recursion_cid($v['son']);
@@ -295,7 +295,7 @@ class category extends model {
 
 	// 获取分类当前位置
 	public function get_place($cid) {
-		$p = array();
+		$p = [];
 		$tmp = $this->get_category_db();
 
 		while(isset($tmp[$cid]) && $v = &$tmp[$cid]) {
@@ -336,7 +336,7 @@ class category extends model {
 		// 如果为频道，获取频道分类下级CID
 		if($arr['type'] == 1) {
 			$arr['son_list'] = $this->get_cids_by_upid($cid, $arr['mid']);
-			$arr['son_cids'] = array();
+			$arr['son_cids'] = [];
 			if(!empty($arr['son_list'])) {
 				foreach($arr['son_list'] as $c => $v) {
 					if(is_array($v)) {
@@ -356,7 +356,7 @@ class category extends model {
 
 	// 删除所有分类缓存 (最多读取2000条，如果缓存太大，需要手工清除缓存)
 	public function delete_cache() {
-		$key_arr = $this->runtime->find_fetch_key(array(), array(), 0, 2000);
+		$key_arr = $this->runtime->find_fetch_key([], [], 0, 2000);
 		foreach ($key_arr as $v) {
 			if(substr($v, 10, 5) == 'cate_') {
 				$this->runtime->delete(substr($v, 10));

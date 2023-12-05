@@ -229,7 +229,7 @@ class parseurl_control extends control{
 			}elseif(!empty($_SERVER['PATH_INFO'])) {
 				$u = $_SERVER['PATH_INFO'];
 			}else{
-				$_GET = array();
+				$_GET = [];
 				$u = $_SERVER["QUERY_STRING"];
 			}
 
