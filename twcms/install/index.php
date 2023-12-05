@@ -64,9 +64,7 @@ if($do == 'license') {
 		js_back('<u>数据库用户名不能为空！</u>');
 	}elseif(!preg_match('/^\w+$/', $dbname)) {
 		js_back('<u>数据库名不正确！</u>');
-	}elseif(empty($tablepre)) {
-		js_back('<u>数据库表前辍不能为空！</u>');
-	}elseif(!preg_match('/^\w+$/', $tablepre)) {
+	}elseif(!preg_match('/^(?:[a-zA-Z_\x80-\x{ffff}][a-zA-Z\d_\x80-\x{ffff}]*)*$/u', $tablepre)) {
 		js_back('<u>数据库表前辍不正确！</u>');
 	}elseif(empty($adm_user)) {
 		js_back('<u>创始人用户名不能为空！</u>');

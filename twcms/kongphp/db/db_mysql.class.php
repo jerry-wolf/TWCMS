@@ -66,7 +66,7 @@ class db_mysql implements db_interface {
 	// 	out: array('uid'=>2, 'username'=>'two')
 	public function get($key) {
 		list($table, $keyarr, $keystr) = $this->key2arr($key);
-		$query = $this->query("SELECT * FROM {$this->tablepre}$table WHERE $keystr LIMIT 1", $this->rlink);
+		$query = $this->query("SELECT * FROM `{$this->tablepre}$table` WHERE $keystr LIMIT 1", $this->rlink);
 		$data = mysqli_fetch_assoc($query);
 		return $data ? $data : array();
 	}
@@ -96,7 +96,7 @@ class db_mysql implements db_interface {
 		}
 		$sql = substr($sql, 0, -4);
 		if($sql) {
-			$query = $this->query("SELECT * FROM {$this->tablepre}$table WHERE $sql", $this->rlink);
+			$query = $this->query("SELECT * FROM `{$this->tablepre}$table` WHERE $sql", $this->rlink);
 			while($row = mysqli_fetch_assoc($query)) {
 				$keyname = $table;
 				foreach($keyarr as $k=>$v) {
@@ -148,7 +148,7 @@ class db_mysql implements db_interface {
 	 */
 	public function delete($key) {
 		list($table, $keyarr, $keystr) = $this->key2arr($key);
-		return $this->query("DELETE FROM {$this->tablepre}$table WHERE $keystr LIMIT 1", $this->wlink);
+		return $this->query("DELETE FROM `{$this->tablepre}$table` WHERE $keystr LIMIT 1", $this->wlink);
 	}
 
 	/**
@@ -181,7 +181,7 @@ class db_mysql implements db_interface {
 		list($table, $col) = explode('-', $key);
 
 		$maxid = FALSE;
-		$query = $this->query("SELECT maxid FROM {$this->tablepre}framework_maxid WHERE name='$table' LIMIT 1", $this->xlink, FALSE);
+		$query = $this->query("SELECT maxid FROM `{$this->tablepre}framework_maxid` WHERE name='$table' LIMIT 1", $this->xlink, FALSE);
 
 		if($query) {
 			$maxid = $this->result($query, 0);
@@ -196,7 +196,7 @@ class db_mysql implements db_interface {
 			throw new Exception('framework_maxid error, mysqli_error:'.mysqli_error($this->xlink));
 		}
 		if($maxid === FALSE) {
-			$query = $this->query("SELECT MAX($col) FROM {$this->tablepre}$table", $this->wlink);
+			$query = $this->query("SELECT MAX($col) FROM `{$this->tablepre}$table`", $this->wlink);
 			$maxid = $this->result($query, 0);
 			$this->query("INSERT INTO {$this->tablepre}framework_maxid SET name='$table', maxid='$maxid'", $this->xlink);
 		}
@@ -231,7 +231,7 @@ class db_mysql implements db_interface {
 	 */
 	public function table_count($table) {
 		$count = FALSE;
-		$query = $this->query("SELECT count FROM {$this->tablepre}framework_count WHERE name='$table' LIMIT 1", $this->xlink, FALSE);
+		$query = $this->query("SELECT count FROM `{$this->tablepre}framework_count` WHERE name='$table' LIMIT 1", $this->xlink, FALSE);
 
 		if($query) {
 			$count = $this->result($query, 0);
@@ -246,7 +246,7 @@ class db_mysql implements db_interface {
 			throw new Exception('framework_cout error, mysqli_error:'.mysqli_error($this->xlink));
 		}
 		if($count === FALSE) {
-			$query = $this->query("SELECT COUNT(*) FROM {$this->tablepre}$table", $this->wlink);
+			$query = $this->query("SELECT COUNT(*) FROM `{$this->tablepre}$table`", $this->wlink);
 			$count = $this->result($query, 0);
 			$this->query("INSERT INTO {$this->tablepre}framework_count SET name='$table', count='$count'", $this->xlink);
 		}
@@ -312,7 +312,7 @@ class db_mysql implements db_interface {
 	// 	)
 	public function find_fetch_key($table, $pri, $where = array(), $order = array(), $start = 0, $limit = 0) {
 		$pris = implode(',', $pri);
-		$s = "SELECT $pris FROM {$this->tablepre}$table";
+		$s = "SELECT $pris FROM `{$this->tablepre}$table`";
 		$s .= $this->arr2where($where);
 		if(!empty($order)) {
 			$s .= ' ORDER BY ';
@@ -361,7 +361,7 @@ class db_mysql implements db_interface {
 	public function find_delete($table, $where, $lowprority = FALSE) {
 		$where = $this->arr2where($where);
 		$lpy = $lowprority ? 'LOW_PRIORITY' : '';
-		$this->query("DELETE $lpy FROM {$this->tablepre}$table $where", $this->wlink);
+		$this->query("DELETE $lpy FROM `{$this->tablepre}$table` $where", $this->wlink);
 		return mysqli_affected_rows($this->wlink);
 	}
 
@@ -372,7 +372,7 @@ class db_mysql implements db_interface {
 	 */
 	public function find_maxid($key) {
 		list($table, $maxid) = explode('-', $key);
-		$arr = $this->fetch_first("SELECT MAX($maxid) AS num FROM {$this->tablepre}$table");
+		$arr = $this->fetch_first("SELECT MAX($maxid) AS num FROM `{$this->tablepre}$table`");
 		return isset($arr['num']) ? intval($arr['num']) : 0;
 	}
 
@@ -384,7 +384,7 @@ class db_mysql implements db_interface {
 	 */
 	public function find_count($table, $where = array()) {
 		$where = $this->arr2where($where);
-		$arr = $this->fetch_first("SELECT COUNT(*) AS num FROM {$this->tablepre}$table $where");
+		$arr = $this->fetch_first("SELECT COUNT(*) AS num FROM `{$this->tablepre}$table` $where");
 		return isset($arr['num']) ? intval($arr['num']) : 0;
 	}
 
