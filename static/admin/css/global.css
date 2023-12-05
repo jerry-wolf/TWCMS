@@ -26,9 +26,9 @@ select,.inp{padding:2px;border:1px solid #8E8F8F;background:#FBFBFB;border-radiu
 .se1{width:20em}
 .se2{width:20em;height:12em}
 .wnum{width:5em}
-.w1{width:20em}
-.w2{width:20em}
-.w3{width:20em;height:10em}
+.w1{width:min(96% - 16px, 20em)}
+.w2{width:min(96% - 16px, 20em)}
+.w3{width:min(96% - 16px, 20em);height:10em}
 .w4{width:30em}
 .ws{width:7em;margin:0 5px}
 .wa{width:20em;margin:0 17px 0 5px}
