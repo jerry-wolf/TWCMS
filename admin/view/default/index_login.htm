@@ -11,30 +11,15 @@
 <body>
 <form method="post" action="index.php?u=index-login">
 <input type="hidden" name="FORM_HASH" value="{$C[FORM_HASH]}" />
-<dl id="lgn">
-	<dt><a href="../" title="返回首页"></a></dt>
-	<dd><label>帐号</label><input type="text" name="username" class="int" /></dd>
-	<dd><label>密码</label><input type="password" name="password" class="int" /></dd>
-	<dt><input type="submit" value="登录" id="btn" /></dt>
-</dl>
+<div id="lgn">
+	<a href="../" title="返回首页"><img src="{$C[admin_static]}admin/img/logo.gif"></a>
+	<input type="text" name="username" class="int" placeholder="帐号" />
+	<input type="password" name="password" class="int" placeholder="密码" />
+	<input type="submit" value="登录" id="btn" />
+</div>
 </form>
 <script src="{$C[admin_static]}js/jquery.js"></script>
 <script>
-var t = ($(document).height()-$("#lgn").height())/2;
-$("#lgn").animate({top: t+10}, 'slow').animate({top: t-10}, 'fast').animate({top: t}, 'fast');
-$(window).resize(function(){
-	$("#lgn").offset({top: ($(document).height()-$("#lgn").height())/2});
-});
-$("label").click(function(){
-	$(this).parent().children(".int").focus();
-	$(this).hide();
-});
-$(".int").focusin(function() {
-	$(this).parent().children("label").hide();
-	$(this).parent().children("div").remove();
-}).focusout(function(){
-	if($(this).val().length==0) $(this).parent().children("label").show();
-});
 $("form:first").submit(function(){
 	$("#btn").attr("disabled", "disabled").addClass("on").val("登录中...");
 	setTimeout(function() { $("#btn").removeAttr("disabled").removeAttr("class").val("登录"); }, 2000);
@@ -63,7 +48,7 @@ function toJson(data) {
 	return json;
 }
 function tAn(obj) {
-	obj.animate({left: 270}, 150).animate({left: 260}, 150).animate({left: 270}, 150).animate({left: 260}, 150).animate({left: 270}, 150).animate({left: 260}, 150).animate({left: 270}, 150).animate({left: 260}, 150);
+	obj.animate({left: 10}, 150).animate({left: 0}, 150).animate({left: 10}, 150).animate({left: 0}, 150).animate({left: 10}, 150).animate({left: 0}, 150).animate({left: 10}, 150).animate({left: 0}, 150);
 }
 </script>
 </body>

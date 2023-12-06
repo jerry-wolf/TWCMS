@@ -1,23 +1,21 @@
-body,div,ul,li,dl,dd,dt,input,form{margin:0;padding:0;font-family:Arial,Verdana;font-size:12px}
+html,body{height:100%}
+body,div,ul,li,input,form{margin:0;padding:0;font-family:Arial,Verdana;font-size:12px}
 ul,li{list-style:none}
 a,a:visited{color:#077AC7;text-decoration:none}
 a:hover{color:#BD0A01}
 img,input{border:0 none}
-body{background:#38739F}
+body{align-items:center;background:#38739F;display:flex;justify-content:center;margin:0}
 
-#lgn{width:250px;margin:auto;position:relative;animation:aIn 600ms linear}
-#lgn dt,#lgn dd{margin-top:10px}
-#lgn dt a{display:block;background:url(../img/logo.gif) no-repeat;width:175px;height:50px;margin:auto}
+#lgn{align-items:center;display:flex;flex-direction:column;gap:10px;width:250px;margin:auto;animation:aIn 600ms linear}
 
-#lgn dd{position:relative;height:40px;background:url(../img/btn.png) 0 -120px no-repeat}
-#lgn label{position:absolute;top:10px;_top:13px;left:8px;color:#A9A9A9;font-size:18px}
+input{border:1px solid #2d2e30;border-radius:5px}
 
-#lgn .int{padding:8px;width:234px;height:24px;background:transparent;vertical-align:middle;font-size:18px}
+#lgn .int{box-shadow:inset 4px 4px 2px rgba(0, 0, 0, 0.15);padding:8px;width:234px;height:24px;vertical-align:middle;font-size:18px}
 #lgn .int:focus{outline:0 none}
-#lgn .tips{position:absolute;top:-54px;_top:-52px;left:260px;width:250px;padding:62px 9px 4px;_padding-bottom:2px;background:url(../img/btn.png) 0 bottom no-repeat}
+#lgn .tips{position:relative;width:250px;padding:62px 9px 4px;background:url(../img/btn.png) 0 bottom border-box no-repeat}
 #lgn .tips b{font-size:12px;line-height:24px;color:#CC0000}
 
-#btn{width:250px;height:40px;background:url(../img/btn.png) 0 0 no-repeat;cursor:pointer;color: white;font-size:20px}
+#btn{width:250px;height:40px;background:url(../img/btn.png) 0 0 border-box no-repeat;cursor:pointer;color: white;font-size:20px}
 #btn:hover{background-position:0 -40px}
 #btn:active,#btn.on{background-position:0 -80px}
 
