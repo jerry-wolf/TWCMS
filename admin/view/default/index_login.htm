@@ -29,9 +29,10 @@ $("form:first").submit(function(){
 		$(".tips").remove();
 		if(data.name != "") {
 			$("#lgn .int[name='"+data.name+"']").parent().append('<div class="tips"><i></i><b>'+data.message+"</b></div>");
-			tAn($(".tips"));
 			$(".tips").click(function(){
-				tAn($(this));
+				console.log(this)
+				this.style.animation = 'none';
+				setTimeout(() => this.style.animation = '');
 			});
 		}else location.href="./";
 	});
@@ -46,9 +47,6 @@ function toJson(data) {
 		$("body").replaceWith(data);
 	}
 	return json;
-}
-function tAn(obj) {
-	obj.animate({left: 10}, 150).animate({left: 0}, 150).animate({left: 10}, 150).animate({left: 0}, 150).animate({left: 10}, 150).animate({left: 0}, 150).animate({left: 10}, 150).animate({left: 0}, 150);
 }
 </script>
 </body>
