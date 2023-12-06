@@ -16,24 +16,25 @@
 	<input type="text" name="username" class="int" placeholder="帐号" />
 	<input type="password" name="password" class="int" placeholder="密码" />
 	<input type="submit" value="登录" id="btn" />
+	<div class="tips"><i></i><b></b></div>
 </div>
 </form>
 <script src="{$C[admin_static]}js/jquery.js"></script>
 <script>
+const resetAnimation = () => {
+	$('.tips').css('animation', 'none');
+	setTimeout(() => $('.tips').css('animation', ''));
+}
+$(".tips").click(resetAnimation);
 $("form:first").submit(function(){
 	$("#btn").attr("disabled", "disabled").addClass("on").val("登录中...");
 	setTimeout(function() { $("#btn").removeAttr("disabled").removeAttr("class").val("登录"); }, 2000);
-
 	$.post($(this).attr("action"), $(this).serialize(), function(data){
 		data = toJson(data);
-		$(".tips").remove();
 		if(data.name != "") {
-			$("#lgn .int[name='"+data.name+"']").parent().append('<div class="tips"><i></i><b>'+data.message+"</b></div>");
-			$(".tips").click(function(){
-				console.log(this)
-				this.style.animation = 'none';
-				setTimeout(() => this.style.animation = '');
-			});
+			$('.tips > b').text(data.message);
+			$('.tips').css('visibility', 'visible');
+			resetAnimation();
 		}else location.href="./";
 	});
 	return false;
