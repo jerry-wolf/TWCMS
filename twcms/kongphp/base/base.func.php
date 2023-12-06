@@ -132,13 +132,12 @@ function _json_decode($s) {
 }
 
 // 简单的数组转JSON
-function _json_encode($arr) {
-	if(!is_array($arr) && empty($arr)) return '';
-	$s = '{';
-	foreach($arr as $k=>$v) {
-		$s .= '"'.$k.'":"'.strtr($v, array('\\'=>'\\\\', '"'=>'\"')).'",';
+function _json_encode($arr): ?string { 
+	try {
+		return json_encode($arr, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR);
+	} catch (Throwable) {
+		return null;
 	}
-	return rtrim($s, ',').'}';
 }
 
 // 增强多维数组进行排序，最多支持两个字段排序

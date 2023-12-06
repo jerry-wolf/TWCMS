@@ -95,7 +95,7 @@ CREATE TABLE pre_cms_article (
   `title` char(80) NOT NULL DEFAULT '',			# 标题
   `color` char(6) NOT NULL DEFAULT '',			# 标题颜色
   `alias` char(50) NOT NULL DEFAULT '',			# 英文别名 (用于伪静态，判断唯一在 only_alias 表，此字段做备份)
-  `tags` varchar(255) NOT NULL DEFAULT '',		# 标签 (json数组)
+  `tags` json NOT NULL DEFAULT '',		# 标签 (json数组)
   `intro` varchar(255) NOT NULL DEFAULT '',		# 内容介绍
   `pic` varchar(255) NOT NULL DEFAULT '',			# 图片地址
   `uid` int unsigned NOT NULL DEFAULT '0',		# 用户ID
@@ -223,7 +223,7 @@ CREATE TABLE pre_cms_product (
   `title` char(80) NOT NULL DEFAULT '',			# 标题
   `color` char(6) NOT NULL DEFAULT '',			# 标题颜色
   `alias` char(50) NOT NULL DEFAULT '',			# 英文别名 (用于伪静态，判断唯一在 only_alias 表，此字段做备份)
-  `tags` varchar(255) NOT NULL DEFAULT '',		# 标签 (json数组)
+  `tags` json NOT NULL DEFAULT '',		# 标签 (json数组)
   `intro` varchar(255) NOT NULL DEFAULT '',		# 内容介绍
   `pic` varchar(255) NOT NULL DEFAULT '',			# 图片地址
   `uid` int unsigned NOT NULL DEFAULT '0',		# 用户ID
@@ -352,7 +352,7 @@ CREATE TABLE pre_cms_photo (
   `title` char(80) NOT NULL DEFAULT '',			# 标题
   `color` char(6) NOT NULL DEFAULT '',			# 标题颜色
   `alias` char(50) NOT NULL DEFAULT '',			# 英文别名 (用于伪静态，判断唯一在 only_alias 表，此字段做备份)
-  `tags` varchar(255) NOT NULL DEFAULT '',		# 标签 (json数组)
+  `tags` json NOT NULL DEFAULT '',		# 标签 (json数组)
   `intro` varchar(255) NOT NULL DEFAULT '',		# 内容介绍
   `pic` varchar(255) NOT NULL DEFAULT '',			# 图片地址
   `uid` int unsigned NOT NULL DEFAULT '0',		# 用户ID
