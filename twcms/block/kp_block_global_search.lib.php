@@ -41,8 +41,8 @@ function kp_block_global_search($conf) {
 	$list_arr = $run->cms_content->list_arr($where, 'id', -1, ($page-1)*$pagenum, $pagenum, $total);
 	foreach($list_arr as &$v) {
 		$run->cms_content->format($v, $mid, $dateformat, $titlenum, $intronum);
-		$v['subject'] = str_ireplace($keyword, '<font color="red">'.$keyword.'</font>', $v['subject']);
-		$v['intro'] = str_ireplace($keyword, '<font color="red">'.$keyword.'</font>', $v['intro']);
+		$v['subject'] = str_ireplace($keyword, '<mark>'.$keyword.'</mark>', $v['subject']);
+		$v['intro'] = str_ireplace($keyword, '<mark>'.$keyword.'</mark>', $v['intro']);
 	}
 
 	// hook kp_block_global_search_after.php
