@@ -477,7 +477,7 @@ CREATE TABLE pre_cms_photo_tag_data (
 DROP TABLE IF EXISTS pre_kv;
 CREATE TABLE pre_kv (
   `k` char(32) NOT NULL DEFAULT '',			# 键名
-  `v` text NOT NULL DEFAULT '',				# 数据
+  `v` json NOT NULL DEFAULT '',				# 数据
   `expiry` int unsigned NOT NULL DEFAULT '0',		# 过期时间
   PRIMARY KEY(k)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
